@@ -4,7 +4,6 @@ import { PageHero } from '../components/layout/PageHero';
 import { Breadcrumbs } from '../components/layout/Breadcrumbs';
 import { DishImage } from '../components/DishImage';
 import { GalleryLightbox } from '../components/GalleryLightbox';
-import { StaggerGroup, StaggerItem } from '../components/motion/Stagger';
 import { SPRING_SNAPPY } from '../components/motion/variants';
 import { useDocumentMeta } from '../hooks/useDocumentMeta';
 import { GALLERY_IMAGES } from '../data/content';
@@ -47,7 +46,7 @@ export default function GalleryPage() {
               whileTap={{ scale: 0.94 }}
               transition={SPRING_SNAPPY}
               onClick={() => setCategory(cat)}
-              className={`relative px-5 py-2 rounded-full text-xs sm:text-sm font-semibold cursor-pointer ${
+              className={`relative isolate px-5 py-2 rounded-full text-xs sm:text-sm font-semibold cursor-pointer ${
                 category === cat ? 'text-white' : 'bg-white hover:bg-stone-100 text-stone-700 border border-stone-200'
               }`}
             >
@@ -63,15 +62,10 @@ export default function GalleryPage() {
           ))}
         </div>
 
-        {/* Responsive masonry-style grid -- keyed by category so switching filters replays the stagger-in */}
-        <StaggerGroup
-          key={category}
-          as="div"
-          className="columns-1 sm:columns-2 lg:columns-3 gap-5 [column-fill:_balance]"
-          stagger={0.04}
-        >
+        {/* Responsive masonry-style grid */}
+        <div className="columns-1 sm:columns-2 lg:columns-3 gap-5 [column-fill:_balance]">
           {filtered.map((image, index) => (
-            <StaggerItem key={image.id} direction="scale" duration={0.35} className="mb-5 break-inside-avoid block">
+            <div key={image.id} className="mb-5 break-inside-avoid block">
               <motion.button
                 whileTap={{ scale: 0.96 }}
                 transition={SPRING_SNAPPY}
@@ -92,9 +86,9 @@ export default function GalleryPage() {
                   <p className="text-stone-300 text-xs uppercase tracking-wider">{image.category}</p>
                 </div>
               </motion.button>
-            </StaggerItem>
+            </div>
           ))}
-        </StaggerGroup>
+        </div>
       </div>
 
       <GalleryLightbox

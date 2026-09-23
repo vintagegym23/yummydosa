@@ -6,8 +6,6 @@ import { PageHero } from '../components/layout/PageHero';
 import { Breadcrumbs } from '../components/layout/Breadcrumbs';
 import { DishImage } from '../components/DishImage';
 import { MenuItemDetail } from '../components/MenuItemDetail';
-import { Reveal } from '../components/motion/Reveal';
-import { StaggerGroup, StaggerItem } from '../components/motion/Stagger';
 import { SPRING_SNAPPY } from '../components/motion/variants';
 import { useOrderModal } from '../context/OrderModalContext';
 import { useDocumentMeta } from '../hooks/useDocumentMeta';
@@ -161,13 +159,13 @@ export default function MenuPage() {
               {results.length} result{results.length === 1 ? '' : 's'} for &ldquo;{query}&rdquo;
             </p>
             {results.length > 0 ? (
-              <StaggerGroup className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5" stagger={0.05}>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
                 {results.map((item) => (
-                  <StaggerItem key={item.id} direction="up" duration={0.3}>
+                  <div key={item.id}>
                     <MenuCard item={item} onSelect={setDetailItem} />
-                  </StaggerItem>
+                  </div>
                 ))}
-              </StaggerGroup>
+              </div>
             ) : (
               <div className="text-center py-16">
                 <p className="text-stone-500">No dishes match &ldquo;{query}&rdquo;.</p>
@@ -191,11 +189,11 @@ export default function MenuPage() {
                 }}
                 className="scroll-mt-40"
               >
-                <Reveal direction="left">
+                <div>
                   <h2 className="text-2xl sm:text-3xl font-extrabold text-stone-900 mb-8">
                     {group.label}
                   </h2>
-                </Reveal>
+                </div>
                 <div className="space-y-10">
                   {group.categories.map((category) => {
                     const items = MENU_ITEMS.filter((item) => item.category === category);
@@ -207,13 +205,13 @@ export default function MenuPage() {
                             {category}
                           </h3>
                         )}
-                        <StaggerGroup className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5" stagger={0.05}>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
                           {items.map((item) => (
-                            <StaggerItem key={item.id} direction="up" duration={0.3}>
+                            <div key={item.id}>
                               <MenuCard item={item} onSelect={setDetailItem} />
-                            </StaggerItem>
+                            </div>
                           ))}
-                        </StaggerGroup>
+                        </div>
                       </div>
                     );
                   })}
@@ -224,7 +222,7 @@ export default function MenuPage() {
         )}
       </div>
 
-      <Reveal direction="scale" className="bg-[#1b4332] text-white py-14 text-center px-4">
+      <div className="bg-[#1b4332] text-white py-14 text-center px-4">
         <h2 className="text-2xl sm:text-3xl font-extrabold mb-3">Ready to Order?</h2>
         <p className="text-stone-300 text-sm mb-6 max-w-lg mx-auto">
           Order delivery, arrange collection, or book a table to dine in at Yummy Dosa, Ilford.
@@ -238,7 +236,7 @@ export default function MenuPage() {
             <ArrowRight className="w-4 h-4" />
           </Link>
         </motion.div>
-      </Reveal>
+      </div>
 
       <MenuItemDetail item={detailItem} onClose={() => setDetailItem(null)} onOrder={handleOrder} />
     </>
