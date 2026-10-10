@@ -44,7 +44,7 @@ export default function BookTablePage() {
         eyebrow="RESERVATIONS"
         title="Book a Table at Yummy Dosa"
         description="Join us at 68 Cranbrook Rd, Ilford for an authentic South Indian vegetarian meal."
-        demoKey="diningTalking"
+        image="/images/book-a-table-hero.jpg"
         align="center"
       />
       <Breadcrumbs items={[{ label: 'Book a Table' }]} />

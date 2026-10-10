@@ -4,13 +4,11 @@ import { ChefHat, Flame, MessageCircle, Images, ArrowRight } from 'lucide-react'
 import { motion, AnimatePresence } from 'motion/react';
 import { PageHero } from '../components/layout/PageHero';
 import { Breadcrumbs } from '../components/layout/Breadcrumbs';
-import { DishImage } from '../components/DishImage';
 import { Reveal } from '../components/motion/Reveal';
 import { StaggerGroup, StaggerItem } from '../components/motion/Stagger';
 import { SPRING_SNAPPY } from '../components/motion/variants';
 import { useDocumentMeta } from '../hooks/useDocumentMeta';
-import { CATERING_CONTENT, BUSINESS, WHATSAPP_TEST_NUMBER } from '../data/content';
-import { SIGNATURE_DISHES } from '../data/menu';
+import { CATERING_CONTENT, CATERING_MENU, BUSINESS, WHATSAPP_TEST_NUMBER } from '../data/content';
 
 export default function CateringPage() {
   const [form, setForm] = useState({ name: '', phone: '', email: '', occasion: '', guests: '', message: '' });
@@ -81,49 +79,76 @@ export default function CateringPage() {
         </div>
       </section>
 
-      {/* Featured catering dishes */}
-      <section className="py-16 bg-[#FBF8EE] border-y border-[#F3E5C8]/50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Catering menu -- unlimited live dosa + add-ons (client's latest catering flyer) */}
+      <section id="catering-menu" className="py-16 bg-[#FBF8EE] border-y border-[#F3E5C8]/50 scroll-mt-24">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <Reveal className="text-center max-w-2xl mx-auto mb-12">
-            <span className="text-xs font-bold uppercase tracking-widest text-[#D9531E] block mb-2">ON THE MENU</span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-stone-900">Crowd-Pleasing Favourites</h2>
+            <span className="text-xs font-bold uppercase tracking-widest text-[#D9531E] block mb-2">CATERING MENU</span>
+            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-stone-900">Catering & Add-Ons Menu</h2>
+            <p className="text-stone-600 text-sm sm:text-base leading-relaxed mt-3">
+              Authentic South Indian food for every occasion -- freshly cooked on site, with menus customised to your event.
+            </p>
           </Reveal>
-          <StaggerGroup className="grid grid-cols-2 lg:grid-cols-4 gap-5">
-            {SIGNATURE_DISHES.slice(0, 4).map((dish) => (
-              <StaggerItem key={dish.id} direction="scale" className="rounded-2xl overflow-hidden aspect-square relative group">
-                <DishImage imageId={dish.id} alt={dish.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
-                <p className="absolute bottom-3 left-3 right-3 text-white font-bold text-sm">{dish.name}</p>
+
+          {/* Unlimited live dosa -- headline offer */}
+          <Reveal direction="scale" className="bg-[#1b4332] text-white rounded-3xl shadow-lg overflow-hidden mb-10">
+            <div className="flex flex-col md:flex-row">
+              <div className="md:w-2/5 p-8 sm:p-10 flex flex-col items-center justify-center text-center bg-[#133527]">
+                <Flame className="w-8 h-8 text-amber-300 mb-3" />
+                <p className="text-sm font-bold uppercase tracking-widest text-amber-300">{CATERING_MENU.liveDosa.title}</p>
+                <p className="text-6xl sm:text-7xl font-extrabold leading-none mt-3">{CATERING_MENU.liveDosa.price}</p>
+                <p className="text-lg font-semibold text-stone-200 mt-1">{CATERING_MENU.liveDosa.unit}</p>
+              </div>
+              <div className="md:w-3/5 p-8 sm:p-10">
+                <h3 className="text-xl font-extrabold mb-1">Live Dosa Items</h3>
+                <p className="text-stone-300 text-sm mb-5">Made fresh in front of your guests -- as much as they like.</p>
+                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2">
+                  {CATERING_MENU.liveDosa.items.map((item) => (
+                    <li key={item} className="flex items-center gap-2 text-sm text-stone-100">
+                      <span className="w-1.5 h-1.5 rounded-full bg-amber-300 shrink-0" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </Reveal>
+
+          {/* Add-ons */}
+          <Reveal className="text-center mb-6">
+            <h3 className="text-2xl font-extrabold tracking-tight text-stone-900">Add-Ons</h3>
+            <p className="text-stone-500 text-xs mt-1">Section price applies to every item unless shown otherwise.</p>
+          </Reveal>
+          <StaggerGroup className="columns-1 sm:columns-2 lg:columns-3 gap-5" stagger={0.05}>
+            {CATERING_MENU.addOns.map((section, i) => (
+              <StaggerItem
+                key={section.title}
+                direction="up"
+                className="break-inside-avoid mb-5 bg-white rounded-2xl border border-stone-100 shadow-sm overflow-hidden"
+              >
+                <div className={`flex items-center justify-between px-5 py-3 text-white ${i % 2 === 0 ? 'bg-[#1F6F3A]' : 'bg-[#EA262A]'}`}>
+                  <h4 className="font-extrabold uppercase tracking-wide text-sm">{section.title}</h4>
+                  <span className="font-extrabold text-sm">{section.price}</span>
+                </div>
+                <ul className="px-5 py-4 space-y-1.5">
+                  {section.items.map((item) => (
+                    <li key={item.name} className="flex items-baseline justify-between gap-3 text-sm text-stone-700">
+                      <span>{item.name}</span>
+                      {item.price && <span className="font-bold text-[#EA262A] shrink-0">{item.price}</span>}
+                    </li>
+                  ))}
+                </ul>
               </StaggerItem>
             ))}
           </StaggerGroup>
-          <div className="text-center mt-8">
-            <Link to="/menu" className="inline-flex items-center gap-2 text-sm font-bold text-[#D9531E] hover:underline">
-              <span>See the full menu</span>
+
+          <div className="text-center mt-6">
+            <a href="#enquiry" className="inline-flex items-center gap-2 text-sm font-bold text-[#D9531E] hover:underline">
+              <span>Enquire about catering</span>
               <ArrowRight className="w-4 h-4" />
-            </Link>
+            </a>
           </div>
         </div>
-      </section>
-
-      {/* Buffet + Live Dosa Station */}
-      <section className="py-16 bg-[#FFFDF7]">
-        <Reveal className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
-          <Flame className="w-7 h-7 text-[#D9531E] mx-auto mb-3" />
-          <span className="text-xs font-bold uppercase tracking-widest text-[#D9531E] block mb-2">LIVE DOSA STATION</span>
-          <h2 className="text-3xl font-extrabold tracking-tight text-stone-900 mb-4">Made Fresh, In Front of Your Guests</h2>
-          <p className="text-stone-600 text-sm sm:text-base leading-relaxed mb-8">
-            A live dosa station is a documented part of Yummy Dosa's event catering, alongside buffet-style
-            service.
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-2.5">
-            {CATERING_CONTENT.liveDosaStationItems.map((item) => (
-              <span key={item} className="px-3.5 py-1.5 rounded-full bg-amber-50 text-[#BC3908] text-xs font-bold border border-amber-100">
-                {item}
-              </span>
-            ))}
-          </div>
-        </Reveal>
       </section>
 
       {/* Catering gallery teaser */}

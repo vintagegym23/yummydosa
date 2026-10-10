@@ -3,6 +3,7 @@ import { AnnouncementBar } from '../AnnouncementBar';
 import { Navbar } from '../Navbar';
 import { Footer } from '../Footer';
 import { OrderModal } from '../OrderModal';
+import { PromoPopup } from '../PromoPopup';
 import { FloatingSocialButton } from '../FloatingSocialButton';
 import { ScrollToTop } from './ScrollToTop';
 import { PageTransition } from '../motion/PageTransition';
@@ -28,6 +29,8 @@ export const Layout: React.FC = () => {
       <FloatingSocialButton />
 
       <OrderModal isOpen={isOpen} onClose={closeOrderModal} selectedItem={selectedItem} />
+
+      <PromoPopup />
     </div>
   );
 };

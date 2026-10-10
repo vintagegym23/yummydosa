@@ -126,7 +126,7 @@ export const Hero: React.FC<HeroProps> = ({ onViewSpecials }) => {
           {/* Subtitle */}
           <StaggerItem direction="up">
             <p className="text-base sm:text-lg text-stone-200 font-normal mb-8 leading-relaxed max-w-md">
-              Real South Indian taste. Freshly prepared. Right here in Ilford.
+              Real South Indian taste. Freshly prepared. We are two minutes away from Ilford Station.
             </p>
           </StaggerItem>
 

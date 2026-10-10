@@ -31,7 +31,7 @@ export const Footer: React.FC = () => {
         <StaggerGroup className="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-white/10" stagger={0.1}>
           {/* Brand Description */}
           <StaggerItem direction="up" className="md:col-span-5 space-y-4">
-            <BrandMark className="bg-white rounded-lg px-3 py-2" />
+            <BrandMark />
             <p className="text-stone-400 text-xs leading-relaxed max-w-md font-normal">
               A South Indian vegetarian restaurant in Ilford, London, serving dosas, tiffin,
               thalis and more -- inspired by the food traditions of Tamil Nadu, Karnataka, Kerala,

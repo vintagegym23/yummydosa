@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Search, X, Leaf, ArrowRight } from 'lucide-react';
 import { motion } from 'motion/react';
 import { PageHero } from '../components/layout/PageHero';
@@ -7,7 +7,6 @@ import { Breadcrumbs } from '../components/layout/Breadcrumbs';
 import { DishImage } from '../components/DishImage';
 import { MenuItemDetail } from '../components/MenuItemDetail';
 import { SPRING_SNAPPY } from '../components/motion/variants';
-import { useOrderModal } from '../context/OrderModalContext';
 import { useDocumentMeta } from '../hooks/useDocumentMeta';
 import { MENU_GROUPS, MENU_ITEMS, searchMenuItems } from '../data/menu';
 import { MenuCatalogItem } from '../types';
@@ -47,7 +46,7 @@ const MenuCard: React.FC<{ item: MenuCatalogItem; onSelect: (item: MenuCatalogIt
 };
 
 export default function MenuPage() {
-  const { openOrderModal } = useOrderModal();
+  const navigate = useNavigate();
   const [query, setQuery] = useState('');
   const [activeGroup, setActiveGroup] = useState(MENU_GROUPS[0].id);
   const [detailItem, setDetailItem] = useState<MenuCatalogItem | null>(null);
@@ -80,9 +79,9 @@ export default function MenuPage() {
     sectionRefs.current[id]?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
-  const handleOrder = (item: MenuCatalogItem) => {
+  const handleOrder = () => {
     setDetailItem(null);
-    openOrderModal(item);
+    navigate('/order-online');
   };
 
   return (
