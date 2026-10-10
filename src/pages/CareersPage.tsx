@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ChevronDown, MapPin, Mail, Briefcase } from 'lucide-react';
+import { ChevronDown, MapPin, Mail, Briefcase, MessageCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { PageHero } from '../components/layout/PageHero';
 import { Breadcrumbs } from '../components/layout/Breadcrumbs';
@@ -49,20 +49,35 @@ const JobCard: React.FC<{ job: (typeof JOB_OPENINGS)[number] }> = ({ job }) => {
                   ))}
                 </ul>
               </div>
-              <div className="flex flex-wrap gap-4 pt-2 border-t border-stone-100 text-sm">
+              <div className="pt-4 border-t border-stone-100 space-y-4 text-sm">
                 <span className="flex items-center gap-1.5 text-stone-500">
                   <MapPin className="w-4 h-4 text-[#D9531E]" />
                   {job.location}
                 </span>
-                {job.contact.email && (
-                  <a
-                    href={`mailto:${job.contact.email}?subject=${encodeURIComponent('Application: ' + job.title)}`}
-                    className="flex items-center gap-1.5 text-[#D9531E] font-semibold hover:underline"
-                  >
-                    <Mail className="w-4 h-4" />
-                    Apply via {job.contact.email}
-                  </a>
-                )}
+                <div className="flex flex-col sm:flex-row gap-3">
+                  {job.contact.phone && (
+                    <a
+                      href={`https://wa.me/${job.contact.phone.replace(/\D/g, '')}?text=${encodeURIComponent(
+                        `Hi, I'd like to apply for the ${job.title} position at Yummy Dosa.`
+                      )}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 inline-flex items-center justify-center gap-2 py-3 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold shadow-sm transition-colors"
+                    >
+                      <MessageCircle className="w-4 h-4 fill-current" />
+                      Apply via WhatsApp
+                    </a>
+                  )}
+                  {job.contact.email && (
+                    <a
+                      href={`mailto:${job.contact.email}?subject=${encodeURIComponent('Application: ' + job.title)}`}
+                      className="flex-1 inline-flex items-center justify-center gap-2 py-3 rounded-full border-2 border-[#D9531E] text-[#D9531E] hover:bg-[#D9531E] hover:text-white font-bold transition-colors"
+                    >
+                      <Mail className="w-4 h-4" />
+                      Apply via Email
+                    </a>
+                  )}
+                </div>
               </div>
             </div>
           </motion.div>
@@ -75,7 +90,7 @@ const JobCard: React.FC<{ job: (typeof JOB_OPENINGS)[number] }> = ({ job }) => {
 export default function CareersPage() {
   useDocumentMeta({
     title: 'Careers',
-    description: 'Current job openings at Yummy Dosa, Ilford -- Restaurant Manager, South Indian Chettinad Chef, and Indian Curry Chef.',
+    description: 'Current job openings at Yummy Dosa, Ilford -- Restaurant Manager, South Indian Chettinad Chef, Indian Curry Chef, Waiter and Waitress.',
   });
 
   return (

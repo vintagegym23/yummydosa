@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { X, Leaf, MessageCircle } from 'lucide-react';
+import { X, Leaf, ShoppingBag } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { MenuCatalogItem } from '../types';
 import { DishImage } from './DishImage';
@@ -84,10 +84,10 @@ export const MenuItemDetail: React.FC<MenuItemDetailProps> = ({ item, onClose, o
                 whileTap={{ scale: 0.97 }}
                 transition={SPRING_SNAPPY}
                 onClick={() => onOrder(item)}
-                className="w-full py-3.5 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm flex items-center justify-center gap-2 shadow-md cursor-pointer"
+                className="w-full py-3.5 rounded-full bg-[#EA262A] hover:bg-[#C81E22] text-white font-bold text-sm flex items-center justify-center gap-2 shadow-md cursor-pointer"
               >
-                <MessageCircle className="w-4 h-4 fill-current" />
-                <span>Order on WhatsApp</span>
+                <ShoppingBag className="w-4 h-4" />
+                <span>Order Online</span>
               </motion.button>
             </div>
           </motion.div>

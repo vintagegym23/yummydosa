@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
+import { BadgePercent } from 'lucide-react';
 import { ORDERING_LOGO_LINKS } from '../data/content';
 import { PageHero } from '../components/layout/PageHero';
 import { Breadcrumbs } from '../components/layout/Breadcrumbs';
@@ -97,6 +98,22 @@ export default function OrderOnlinePage() {
               </div>
             </motion.div>
           </Reveal>
+
+          {/* Tagline -- echoes the 10% off badge */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ ...SPRING_SNAPPY, delay: 0.55 }}
+            className="flex justify-center mt-6"
+          >
+            <p className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-gradient-to-br from-[#F3C75A] to-[#E8B93B] ring-4 ring-white shadow-lg shadow-amber-500/30 text-stone-900 text-sm sm:text-base font-semibold text-center">
+              <BadgePercent className="w-5 h-5 shrink-0" />
+              <span>
+                Order through our website and get <span className="font-extrabold">10% off</span>.
+              </span>
+            </p>
+          </motion.div>
 
           <p className="text-center text-stone-400 text-xs mt-10">
             <Link to="/menu" className="underline hover:text-[#D9531E]">

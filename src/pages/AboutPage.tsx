@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Leaf, Heart, Users } from 'lucide-react';
+import { ArrowRight, Leaf, Heart, Users, Check, PartyPopper, Truck } from 'lucide-react';
 import { motion } from 'motion/react';
 import { PageHero } from '../components/layout/PageHero';
 import { Breadcrumbs } from '../components/layout/Breadcrumbs';
@@ -9,7 +9,12 @@ import { Reveal } from '../components/motion/Reveal';
 import { StaggerGroup, StaggerItem } from '../components/motion/Stagger';
 import { SPRING_SNAPPY } from '../components/motion/variants';
 import { useDocumentMeta } from '../hooks/useDocumentMeta';
-import { ABOUT_CONTENT, BUSINESS } from '../data/content';
+import { ABOUT_CONTENT, BUSINESS, SERVICES_CONTENT } from '../data/content';
+
+const SERVICE_CARDS = [
+  { ...SERVICES_CONTENT.banquet, icon: PartyPopper, demoKey: 'banquetBallroom', to: '/banquet-hall', cta: 'Explore the Banquet Hall' },
+  { ...SERVICES_CONTENT.catering, icon: Truck, demoKey: 'cateringBuffetTable', to: '/catering', cta: 'Enquire About Catering' },
+] as const;
 
 export default function AboutPage() {
   useDocumentMeta({
@@ -120,6 +125,66 @@ export default function AboutPage() {
               <StaggerItem key={point.title} direction="up" className="bg-white/5 border border-white/10 rounded-2xl p-6">
                 <h3 className="font-bold text-amber-300 text-base mb-2">{point.title}</h3>
                 <p className="text-stone-300 text-sm leading-relaxed">{point.body}</p>
+              </StaggerItem>
+            ))}
+          </StaggerGroup>
+        </div>
+      </section>
+
+      {/* Our Services -- banquet hall & outdoor catering */}
+      <section className="py-20 bg-[#FBF8EE] border-b border-[#F3E5C8]/50">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <Reveal className="text-center max-w-2xl mx-auto mb-14">
+            <span className="text-xs font-bold uppercase tracking-widest text-[#D9531E] block mb-2">
+              Our Services
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight">
+              <span className="text-[#1b4332]">Banquet Hall &</span>{' '}
+              <span className="text-[#D9531E]">Outdoor Catering</span>
+            </h2>
+            <p className="text-stone-600 leading-relaxed text-sm sm:text-base mt-4">
+              Celebrate with us at the restaurant, or let us bring authentic South Indian food to your event.
+            </p>
+          </Reveal>
+          <StaggerGroup className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {SERVICE_CARDS.map((service) => (
+              <StaggerItem
+                key={service.to}
+                direction="up"
+                className="bg-white rounded-3xl border border-stone-100 shadow-sm hover:shadow-lg transition-shadow overflow-hidden flex flex-col"
+              >
+                <div className="aspect-[16/9] w-full overflow-hidden">
+                  <DishImage demoKey={service.demoKey} alt={service.title} className="w-full h-full object-cover" />
+                </div>
+                <div className="p-6 sm:p-8 flex flex-col flex-1">
+                  <div className="flex items-center gap-3 mb-3">
+                    <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-emerald-50 text-emerald-700 shrink-0">
+                      <service.icon className="w-5 h-5" />
+                    </span>
+                    <h3 className="text-xl font-extrabold text-stone-900">{service.title}</h3>
+                  </div>
+                  <p className="inline-block self-start px-3 py-1 rounded-full bg-amber-50 border border-amber-100 text-[#BC3908] text-xs font-bold mb-4">
+                    {service.tagline}
+                  </p>
+                  <p className="text-stone-600 text-sm leading-relaxed mb-4">{service.body}</p>
+                  <ul className="space-y-2 mb-6">
+                    {service.points.map((point) => (
+                      <li key={point} className="flex items-start gap-2 text-stone-700 text-sm">
+                        <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                        <span>{point}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <motion.div whileTap={{ scale: 0.95 }} transition={SPRING_SNAPPY} className="mt-auto self-start">
+                    <Link
+                      to={service.to}
+                      className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#1b4332] hover:bg-[#133527] text-white text-sm font-bold transition-colors shadow-sm"
+                    >
+                      <span>{service.cta}</span>
+                      <ArrowRight className="w-4 h-4" />
+                    </Link>
+                  </motion.div>
+                </div>
               </StaggerItem>
             ))}
           </StaggerGroup>

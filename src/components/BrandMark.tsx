@@ -6,7 +6,7 @@ export const BrandMark: React.FC<{ className?: string }> = ({ className = '' }) 
     <img
       src="/logo.png"
       alt="Yummy Dosa"
-      className={`h-9 sm:h-10 w-auto object-contain ${className}`}
+      className={`h-11 sm:h-14 w-auto object-contain rounded-lg ${className}`}
     />
   );
 };

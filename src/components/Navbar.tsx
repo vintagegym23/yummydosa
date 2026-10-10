@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import { Phone, MessageCircle, Menu as MenuIcon, X, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { RESTAURANT_INFO } from '../data/restaurantData';
@@ -54,6 +54,8 @@ const DesktopNavLink: React.FC<{ to: string; end?: boolean; children: React.Reac
 export const Navbar: React.FC<NavbarProps> = ({ onOpenOrderModal }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [experienceOpen, setExperienceOpen] = useState(false);
+  const { pathname } = useLocation();
+  const experienceActive = EXPERIENCE_LINKS.some((link) => pathname.startsWith(link.to));
 
   return (
     <header
@@ -72,7 +74,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenOrderModal }) => {
           {/* Desktop Navigation Links */}
           <nav
             aria-label="Primary Navigation"
-            className="hidden lg:flex items-center gap-4 xl:gap-6 font-medium text-sm text-stone-700"
+            className="hidden lg:flex items-center gap-4 xl:gap-6 font-medium text-sm text-[#1F6F3A]"
           >
             <DesktopNavLink to="/" end>Home</DesktopNavLink>
             <DesktopNavLink to="/menu">Menu</DesktopNavLink>
@@ -85,7 +87,9 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenOrderModal }) => {
               onMouseLeave={() => setExperienceOpen(false)}
             >
               <button
-                className="flex items-center gap-1 hover:text-[#D9531E] transition-colors cursor-pointer"
+                className={`relative flex items-center gap-1 py-1 transition-colors cursor-pointer ${
+                  experienceActive ? 'text-[#D9531E] font-bold' : 'hover:text-[#D9531E]'
+                }`}
                 aria-haspopup="true"
                 aria-expanded={experienceOpen}
                 onClick={() => setExperienceOpen((v) => !v)}
@@ -94,6 +98,13 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenOrderModal }) => {
                 <motion.span animate={{ rotate: experienceOpen ? 180 : 0 }} transition={{ duration: 0.2, ease: EASE_OUT }}>
                   <ChevronDown className="w-3.5 h-3.5" />
                 </motion.span>
+                {experienceActive && (
+                  <motion.span
+                    layoutId="desktop-nav-underline"
+                    className="absolute left-0 right-0 -bottom-1 h-0.5 rounded-full bg-[#D9531E]"
+                    transition={SPRING_SNAPPY}
+                  />
+                )}
               </button>
               <AnimatePresence>
                 {experienceOpen && (
@@ -111,7 +122,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenOrderModal }) => {
                           to={link.to}
                           className={({ isActive }) =>
                             `block px-4 py-2.5 text-sm font-medium transition-colors ${
-                              isActive ? 'text-[#D9531E] bg-orange-50' : 'text-stone-700 hover:bg-stone-50'
+                              isActive ? 'text-[#D9531E] bg-orange-50' : 'text-[#1F6F3A] hover:bg-stone-50'
                             }`
                           }
                           onClick={() => setExperienceOpen(false)}
@@ -159,7 +170,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenOrderModal }) => {
               whileTap={{ scale: 0.9 }}
               transition={SPRING_SNAPPY}
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-lg text-stone-600 hover:text-stone-900 hover:bg-stone-100 transition-colors"
+              className="p-2 rounded-lg text-[#1F6F3A] hover:text-[#174F2A] hover:bg-stone-100 transition-colors"
               aria-label="Toggle Navigation Menu"
               aria-expanded={mobileMenuOpen}
             >
@@ -191,7 +202,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenOrderModal }) => {
             className="lg:hidden bg-white border-b border-stone-200 shadow-xl overflow-hidden"
           >
             <div className="px-4 pt-3 pb-6 space-y-3 max-h-[calc(100vh-5rem)] overflow-y-auto">
-              <StaggerGroup as="div" stagger={0.045} className="flex flex-col space-y-1 text-base font-semibold text-stone-700">
+              <StaggerGroup as="div" stagger={0.045} className="flex flex-col space-y-1 text-base font-semibold text-[#1F6F3A]">
                 {MOBILE_LINKS.map((link) => (
                   <StaggerItem key={link.to} direction="right" duration={0.28}>
                     <NavLink

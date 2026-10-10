@@ -120,6 +120,172 @@ export const CATERING_CONTENT = {
   liveDosaStationItems: BANQUET_CONTENT.liveDosaStationItems,
 };
 
+/**
+ * Catering & add-ons menu -- transcribed from the client's latest catering flyer
+ * (client-resources/catering-and-add-ons-menu.png). A section's `price` applies to
+ * every item in it unless the item carries its own `price`.
+ */
+export const CATERING_MENU = {
+  liveDosa: {
+    title: 'Unlimited Live Dosa',
+    price: '£10',
+    unit: 'per person',
+    items: [
+      'Medhu Vada', 'Idly (2 pcs)', 'Plain Dosa', 'Masala Dosa', 'Cheese Dosa', 'Mysore Dosa',
+      'Chocolate Dosa', 'Mix Veg Uthappam', 'Sambar', 'Coconut Chutney', 'Tomato Chutney',
+    ],
+  },
+  addOns: [
+    {
+      title: 'Starters',
+      price: '£3.49',
+      items: [
+        { name: 'Madras Bhaji (Potato / Onion / Chilli)' }, { name: 'Chilli Idly' }, { name: 'Plain Mogo' },
+        { name: 'Masala Mogo' }, { name: 'Chilli Garlic Mogo' }, { name: 'Baby Corn Manchurian' },
+        { name: 'Chilli Paneer', price: '£3.99' }, { name: 'Paneer 65', price: '£3.99' },
+        { name: 'Paneer Manchurian', price: '£3.99' }, { name: 'Gobi Manchurian' }, { name: 'Chilli Gobi' },
+        { name: 'Gobi 65' }, { name: 'Chilli Mushroom' }, { name: 'Mushroom Manchurian' },
+        { name: 'French Fries' }, { name: 'Masala Fries' }, { name: 'Cheesy Fries', price: '£2.99' },
+      ],
+    },
+    {
+      title: 'Chaat',
+      price: '£3.49',
+      items: [
+        { name: 'Spring Roll / Veg Nuggets' }, { name: 'Pani Puri' }, { name: 'Bhel Puri' }, { name: 'Dahi Puri' },
+        { name: 'Samosa Chaat' }, { name: 'Aloo Tikki & Choley' }, { name: 'Veg Samosa' }, { name: 'Punjabi Samosa' },
+        { name: 'Pav Bhaji' }, { name: 'Cheese Pav Bhaji' }, { name: 'Masala Vada' },
+      ],
+    },
+    {
+      title: 'Noodles & Rice',
+      price: '£3.49',
+      items: [
+        { name: 'Veg Noodles' }, { name: 'Hakka Noodles' }, { name: 'Schezwan Noodles' }, { name: 'Veg Fried Rice' },
+        { name: 'Mushroom Fried Rice' }, { name: 'Schezwan Fried Rice' }, { name: 'Paneer Fried Rice', price: '£3.99' },
+        { name: 'Gobi Fried Rice' },
+      ],
+    },
+    {
+      title: 'Rice Variety',
+      price: '£3.49',
+      items: [
+        { name: 'Bisi Bele Bath' }, { name: 'Keera Bath' }, { name: 'Jeera Rice' }, { name: 'Mint & Coriander Rice' },
+        { name: 'Lemon Rice' }, { name: 'Mango Rice' }, { name: 'Tomato Rice' }, { name: 'Veg Pulao' },
+        { name: 'Tamarind Rice' }, { name: 'Capsicum Rice' }, { name: 'Coconut Rice' }, { name: 'Rajma Chawal' },
+        { name: 'Madras Dum Biryani' },
+      ],
+    },
+    {
+      title: 'Sweets',
+      price: '£1.99',
+      items: [
+        { name: 'Badam Halwa' }, { name: 'Gajar Halwa' }, { name: 'Gulab Jamun' }, { name: 'Rasamalai', price: '£1.49' },
+        { name: 'Pineapple Kesari', price: '£0.99' }, { name: 'Kesari', price: '£0.99' }, { name: 'Sweet Pongal' },
+        { name: 'South Indian Halwa' }, { name: 'Semolina Kheer' }, { name: 'Sweet Pan', price: '£1.49' },
+      ],
+    },
+    {
+      title: 'Soups',
+      price: '£2.49',
+      items: [{ name: 'Tomato Soup' }, { name: 'Sweet Corn Soup' }, { name: 'Rasam' }],
+    },
+    {
+      title: 'Lassi',
+      price: '£2.99',
+      items: [{ name: 'Lassi (Salt / Sweet / Mango)' }, { name: 'Butter Milk' }, { name: 'Rose Milk' }],
+    },
+    {
+      title: 'Hot Drinks',
+      price: '£1.49',
+      items: [{ name: 'Filter Coffee' }, { name: 'Masala Tea' }, { name: 'Badam Milk' }],
+    },
+    {
+      title: 'Fresh Juices',
+      price: '£2.49',
+      items: [{ name: 'Orange Juice' }, { name: 'Apple Juice' }, { name: 'Carrot Juice' }, { name: 'Passion Juice' }],
+    },
+    {
+      title: 'Ice Cream',
+      price: '£2.49',
+      items: [
+        { name: 'Matka Kulfi', price: '£3.49' },
+        { name: 'Scoop of Ice Cream (Vanilla / Chocolate / Strawberry)', price: '£1.99' },
+      ],
+    },
+    {
+      title: 'Beer & Wine',
+      price: '£3.99',
+      items: [
+        { name: 'Kingfisher (650 ml) 4.8%' }, { name: 'Cobra (620 ml) 4.5%' },
+        { name: 'Red Wine (75cl)', price: '£8.99' }, { name: 'White Wine (75cl)', price: '£8.99' },
+      ],
+    },
+  ] as { title: string; price: string; items: { name: string; price?: string }[] }[],
+};
+
+/** Weekend promotions shown in the entry popup -- from the client's morning buffet & unlimited lunch flyers. */
+export const PROMOTIONS = [
+  {
+    id: 'morning-buffet',
+    eyebrow: 'Weekend Special',
+    title: 'Morning Buffet',
+    days: 'Sat, Sun & Bank Holidays',
+    time: '9:00 AM – 11:30 AM',
+    adultPrice: '£8.99',
+    kidsPrice: '£4.99',
+    kidsLabel: 'Kids below 7',
+    demoKey: 'idliChutneyBananaLeaf',
+    items: [
+      'Idly', 'Medhu Vada', 'Ghee Pongal', 'Plain Dosa', 'Masala Dosa', 'Sweet',
+      'Mixed Uthappam', 'Sambar', 'White Chutney', 'Red Chutney', 'Masala Tea or Coffee',
+    ],
+    notes: ['Special student discount: 5% off', 'Free parking above £30 (max 2 hrs). T&Cs apply.'],
+  },
+  {
+    id: 'unlimited-lunch',
+    eyebrow: 'Flavours of India',
+    title: 'Unlimited Lunch',
+    days: 'Sat, Sun & Bank Holidays',
+    time: '12:30 PM – 3:30 PM',
+    adultPrice: '£9.99',
+    kidsPrice: '£4.99',
+    kidsLabel: 'Kids under 10',
+    demoKey: 'thaliMetalTray',
+    items: [
+      'Sweet', 'Butter Chilli', 'Papadam', 'Roti Pachadi', 'White Rice', 'Sambar', 'Kootu',
+      'Rasam', 'Kara Kolambu', 'Chapathi', 'Yoghurt', 'Brinjal Masala Dal', 'Poriyal',
+    ],
+    notes: ['2 min walk from Ilford Station'],
+  },
+] as const;
+
+/** About page "Our Services" cards -- facts from the client's banquet/catering flyers (client-resources/README.md). */
+export const SERVICES_CONTENT = {
+  banquet: {
+    title: 'Banquet Hall',
+    tagline: 'Complimentary free banquet hall for events & party bookings',
+    body: 'Our dedicated banquet hall sits alongside the main restaurant at 68 Cranbrook Road -- and when you book your event or party food with us, the hall comes free of charge.',
+    points: [
+      'Free hall hire with your event or party booking',
+      'Birthdays, weddings, engagements, baby showers & anniversaries',
+      'Corporate events, private functions & family gatherings',
+      'Live dosa station & South Indian buffet menus',
+    ],
+  },
+  catering: {
+    title: 'Outdoor Catering',
+    tagline: 'Unlimited live dosa menu from £10 per person',
+    body: 'We bring the Yummy Dosa kitchen to you -- dosas cooked fresh on site, with menus built around your occasion, for events across London and the surrounding areas.',
+    points: [
+      'Freshly cooked on site by our chefs',
+      'Hygienic & professional service',
+      'Customised menus, plus starters, chaat, rice, sweets & drinks add-ons',
+      'Parties, weddings, corporate events, birthdays & home functions',
+    ],
+  },
+};
+
 /** info.md section 34: franchise content. Only documented support areas -- no investment/ROI/outlet-count figures exist in the source, so none are shown. */
 export const FRANCHISE_CONTENT = {
   headline: 'Own a Yummy Dosa Franchise',
@@ -157,7 +323,7 @@ export const JOB_OPENINGS: JobOpening[] = [
       'Marketing and business development',
     ],
     location: 'Yummy Dosa, 68 Cranbrook Rd, Ilford IG1 4NH',
-    contact: { email: 'info@yummydosarestaurant.co.uk' },
+    contact: { phone: BUSINESS.recruitmentContact.phone, email: BUSINESS.recruitmentContact.email },
   },
   {
     id: 'chettinad-chef',
@@ -173,7 +339,7 @@ export const JOB_OPENINGS: JobOpening[] = [
       'Temperature control and hygiene',
     ],
     location: 'Yummy Dosa, 68 Cranbrook Rd, Ilford IG1 4NH',
-    contact: { email: 'info@yummydosarestaurant.co.uk' },
+    contact: { phone: BUSINESS.recruitmentContact.phone, email: BUSINESS.recruitmentContact.email },
   },
   {
     id: 'curry-chef',
@@ -188,7 +354,39 @@ export const JOB_OPENINGS: JobOpening[] = [
       'Staff task allocation',
     ],
     location: 'Yummy Dosa, 68 Cranbrook Rd, Ilford IG1 4NH',
-    contact: { email: 'info@yummydosarestaurant.co.uk' },
+    contact: { phone: BUSINESS.recruitmentContact.phone, email: BUSINESS.recruitmentContact.email },
+  },
+  {
+    id: 'waiter',
+    title: 'Waiter',
+    summary: 'Front-of-house role welcoming guests, taking orders and keeping our busy dining room running smoothly.',
+    responsibilities: [
+      'Greeting and seating guests',
+      'Taking food and drink orders accurately',
+      'Serving dishes promptly and with care',
+      'Explaining menu items and dietary information',
+      'Clearing, resetting and keeping tables tidy',
+      'Handling bills and payments',
+      'Working closely with the kitchen team',
+    ],
+    location: 'Yummy Dosa, 68 Cranbrook Rd, Ilford IG1 4NH',
+    contact: { phone: BUSINESS.recruitmentContact.phone, email: BUSINESS.recruitmentContact.email },
+  },
+  {
+    id: 'waitress',
+    title: 'Waitress',
+    summary: 'Front-of-house role giving guests a warm welcome and friendly, attentive table service.',
+    responsibilities: [
+      'Greeting and seating guests',
+      'Taking food and drink orders accurately',
+      'Serving dishes promptly and with care',
+      'Explaining menu items and dietary information',
+      'Clearing, resetting and keeping tables tidy',
+      'Handling bills and payments',
+      'Working closely with the kitchen team',
+    ],
+    location: 'Yummy Dosa, 68 Cranbrook Rd, Ilford IG1 4NH',
+    contact: { phone: BUSINESS.recruitmentContact.phone, email: BUSINESS.recruitmentContact.email },
   },
 ];
 
