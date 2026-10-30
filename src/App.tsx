@@ -11,6 +11,7 @@ import MenuPage from './pages/MenuPage';
 import AboutPage from './pages/AboutPage';
 import GalleryPage from './pages/GalleryPage';
 import OrderOnlinePage from './pages/OrderOnlinePage';
+import OrderFromUsPage from './pages/OrderFromUsPage';
 import BookTablePage from './pages/BookTablePage';
 import BanquetHallPage from './pages/BanquetHallPage';
 import CateringPage from './pages/CateringPage';
@@ -25,6 +26,8 @@ export default function App() {
     <BrowserRouter>
       <OrderModalProvider>
         <Routes>
+          {/* Full-screen embedded ordering -- outside the site chrome */}
+          <Route path="orderfromus" element={<OrderFromUsPage />} />
           <Route element={<Layout />}>
             <Route index element={<HomePage />} />
             <Route path="menu" element={<MenuPage />} />

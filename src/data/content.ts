@@ -85,8 +85,15 @@ export const ORDERING_LOGO_LINKS: { id: string; name: string; href: string }[] =
   { id: 'justeat', name: 'Just Eat', href: 'https://www.just-eat.co.uk/restaurants-yummy-dosa-restaurant-ilford/menu' },
   { id: 'ubereats', name: 'Uber Eats', href: 'https://www.ubereats.com/gb/store/yummy-dosa-restaurant/akehr_6hWDi2Ove_iQj-Kw' },
   { id: 'deliveroo', name: 'Deliveroo', href: 'https://deliveroo.co.uk/menu/london/cranbrook/yummy-dosa-restaurant-68-cranbrook-road' },
-  { id: 'direct', name: 'Order Direct', href: 'https://yummydosarestaurant.co.uk/yummydosa.html' },
+  { id: 'direct', name: 'Order Direct', href: '/orderfromus' },
 ];
+
+/**
+ * Yummy Dosa's own ordering/booking system, hosted by PocketOrder (link supplied
+ * by the client's POS provider). Embedded full-screen at /orderfromus so visitors
+ * stay on our domain; the direct (non-embed) link is https://pocketorder.co.uk/#/profile?id=266
+ */
+export const DIRECT_ORDERING_EMBED_URL = 'https://pocketorder.co.uk/#/profile?id=266&iframe=1';
 
 /** info.md section 6-7: the actual "about" narrative content. */
 export const ABOUT_CONTENT = {
