@@ -59,7 +59,7 @@ const MenuCard: React.FC<{ item: MenuCatalogItem; onSelect: (item: MenuCatalogIt
 export default function MenuPage() {
   const navigate = useNavigate();
   const [query, setQuery] = useState('');
-  const [activeGroup, setActiveGroup] = useState(MENU_GROUPS[0].id);
+  const [activeGroup, setActiveGroup] = useState<string>(MENU_GROUPS[0].id);
   const [detailItem, setDetailItem] = useState<MenuCatalogItem | null>(null);
   const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
 
