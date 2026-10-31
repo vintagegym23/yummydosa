@@ -17,11 +17,17 @@ interface HeroAction {
 interface PageHeroProps {
   eyebrow?: string;
   title: string;
-  description?: string;
+  description?: React.ReactNode;
   primaryAction?: HeroAction;
   secondaryAction?: HeroAction;
   /** literal decorative image URL (e.g. an approved brand/ambience photo) */
   image?: string;
+  /**
+   * `image`'s width/height (e.g. '2163/727'). When set, on wide screens (xl+) the
+   * hero takes the image's own proportions so the whole image shows uncropped;
+   * smaller screens keep the cropped `height` layout so the text still fits.
+   */
+  imageAspect?: string;
   /** real dish id, rendered via DishImage (real photo -> demo photo -> placeholder) */
   imageId?: string;
   /** demo venue/event photo (src/data/demoImages.ts), for pages not centered on one dish */
@@ -84,6 +90,7 @@ export const PageHero: React.FC<PageHeroProps> = ({
   primaryAction,
   secondaryAction,
   image,
+  imageAspect,
   imageId,
   demoKey,
   align = 'left',
@@ -92,7 +99,10 @@ export const PageHero: React.FC<PageHeroProps> = ({
 }) => {
   return (
     <section
-      className={`relative bg-stone-950 overflow-hidden text-white flex items-center select-none ${HEIGHT_CLASS[height]}`}
+      className={`relative bg-stone-950 overflow-hidden text-white flex items-center select-none ${HEIGHT_CLASS[height]} ${
+        imageAspect ? 'xl:aspect-(--hero-aspect) xl:min-h-0 xl:py-10' : ''
+      }`}
+      style={imageAspect ? ({ '--hero-aspect': imageAspect } as React.CSSProperties) : undefined}
     >
       <div className="absolute inset-0 z-0 overflow-hidden">
         {imageId || demoKey ? (
@@ -115,7 +125,7 @@ export const PageHero: React.FC<PageHeroProps> = ({
             src={image}
             alt={title}
             initial={{ scale: 1.12, opacity: 0 }}
-            animate={{ scale: 1.04, opacity: 1 }}
+            animate={{ scale: imageAspect ? 1 : 1.04, opacity: 1 }}
             transition={{ duration: 1.3, ease: EASE_OUT }}
             className="absolute inset-0 w-full h-full object-cover object-center"
           />

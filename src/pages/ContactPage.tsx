@@ -35,7 +35,8 @@ export default function ContactPage() {
         eyebrow="CONTACT"
         title="Find Yummy Dosa"
         description={BUSINESS.address.full}
-        demoKey="restaurantExterior"
+        image={encodeURI('/images/contact hero image.png')}
+        imageAspect="2171/724"
         height="compact"
       />
       <Breadcrumbs items={[{ label: 'Contact' }]} />

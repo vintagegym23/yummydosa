@@ -44,18 +44,6 @@ export const BUSINESS = {
   mapsQuery: 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent('Yummy Dosa, 68 Cranbrook Rd, Ilford IG1 4NH'),
 };
 
-/**
- * Homepage testimonials ticker. PLACEHOLDERS -- no real review text has been
- * supplied yet, so these must be replaced with genuine Google reviews (copied
- * with the reviewer's name as shown on Google) before the site goes live.
- */
-export const TESTIMONIALS: { name: string; rating: number; text: string }[] = [
-  { name: 'Reviewer name 1', rating: 5, text: 'Placeholder – paste a real Google review here.' },
-  { name: 'Reviewer name 2', rating: 5, text: 'Placeholder – paste a real Google review here.' },
-  { name: 'Reviewer name 3', rating: 5, text: 'Placeholder – paste a real Google review here.' },
-  { name: 'Reviewer name 4', rating: 5, text: 'Placeholder – paste a real Google review here.' },
-  { name: 'Reviewer name 5', rating: 5, text: 'Placeholder – paste a real Google review here.' },
-];
 
 /**
  * TEMPORARY test destination: banquet/catering enquiry-form WhatsApp

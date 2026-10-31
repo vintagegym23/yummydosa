@@ -29,8 +29,7 @@ export default function AboutPage() {
         eyebrow="OUR STORY"
         title="A Taste of South India in Ilford"
         description={BUSINESS.tagline}
-        demoKey="diningGroupRestaurant"
-        align="center"
+        image={encodeURI('/images/about hero image.png')}
         height="tall"
       />
       <Breadcrumbs items={[{ label: 'About' }]} />

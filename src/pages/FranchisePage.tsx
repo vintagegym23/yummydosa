@@ -38,7 +38,8 @@ export default function FranchisePage() {
         eyebrow="FRANCHISE"
         title={FRANCHISE_CONTENT.headline}
         description={FRANCHISE_CONTENT.intro}
-        demoKey="restaurantWindow"
+        image={encodeURI('/images/Franchise us hero.png')}
+        imageAspect="2163/727"
         primaryAction={{ label: 'Enquire About Franchising', href: '#enquiry' }}
         height="tall"
       />

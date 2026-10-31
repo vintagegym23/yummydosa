@@ -111,30 +111,7 @@ body {
   animation: gradient-pan 8s ease-in-out infinite;
 }
 
-/* Infinite right-to-left ticker: the track holds the list twice, so -50% lands on an identical frame. */
-@keyframes marquee-rtl {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-.animate-marquee-rtl {
-  animation: marquee-rtl 40s linear infinite;
-}
-.marquee:hover .animate-marquee-rtl,
-.marquee:focus-within .animate-marquee-rtl {
-  animation-play-state: paused;
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .marquee {
-    overflow-x: auto;
-  }
-  .animate-marquee-rtl {
-    animation: none !important;
-  }
   * {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;

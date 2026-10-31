@@ -6,6 +6,8 @@ import { FeatureCards } from '../components/FeatureCards';
 import { MenuSection } from '../components/MenuSection';
 import { SpecialsSection } from '../components/SpecialsSection';
 import { TestimonialsSection } from '../components/TestimonialsSection';
+import { VideoReviewsSection } from '../components/VideoReviewsSection';
+import { ThankYouVideoSection } from '../components/ThankYouVideoSection';
 import { LocationsSection } from '../components/LocationsSection';
 import { PromoBanner } from '../components/PromoBanner';
 import { useOrderModal } from '../context/OrderModalContext';
@@ -59,6 +61,10 @@ export default function HomePage() {
       />
 
       <TestimonialsSection />
+
+      <VideoReviewsSection />
+
+      <ThankYouVideoSection />
 
       <PromoBanner
         eyebrow="GALLERY"

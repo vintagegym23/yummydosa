@@ -100,9 +100,15 @@ export default function MenuPage() {
       <PageHero
         eyebrow="THE MENU"
         title="The Menu"
-        description={`${MENU_ITEMS.length} dishes rooted in Tamil Nadu, Karnataka, Kerala, Andhra Pradesh and Telangana -- dosas, tiffin, thalis, chaat, curries, drinks and desserts, all pure vegetarian.`}
+        description={
+          <>
+            {MENU_ITEMS.length} authentic South Indian dishes
+            <br />
+            All pure vegetarian.
+          </>
+        }
         primaryAction={{ label: 'Order Online', to: '/order-online' }}
-        imageId="masala-dosa"
+        image={encodeURI('/images/menu hero image.png')}
         height="compact"
       />
       <Breadcrumbs items={[{ label: 'Menu' }]} />
