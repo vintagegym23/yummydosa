@@ -46,12 +46,18 @@ export const BUSINESS = {
 
 
 /**
- * TEMPORARY test destination: banquet/catering enquiry-form WhatsApp
- * messages are pointed here instead of the real contact numbers so
- * submissions can be verified without messaging real staff. Swap this
- * out (or delete it and revert the two callers) before going live.
+ * WhatsApp numbers (digits only, international format) that receive each
+ * enquiry form's message. These replace the earlier temporary test number:
+ * - franchise -> franchiseContact (the number the test pointed at already)
+ * - banquet & catering -> banquetContact, Mr. Venkat (07776 675146 is also the
+ *   "Catering enquiries" number on the client's printed menu)
+ * Change a number here to re-route that form.
  */
-export const WHATSAPP_TEST_NUMBER = '447525795805';
+export const ENQUIRY_WHATSAPP = {
+  banquet: '447776675146',
+  catering: '447776675146',
+  franchise: '447525795805',
+} as const;
 
 /**
  * Official Yummy Dosa social profiles (confirmed live pages). No YouTube

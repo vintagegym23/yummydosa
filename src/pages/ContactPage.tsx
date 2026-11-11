@@ -13,10 +13,7 @@ export default function ContactPage() {
   const [form, setForm] = useState({ name: '', email: '', phone: '', message: '' });
   const [sent, setSent] = useState(false);
 
-  useDocumentMeta({
-    title: 'Contact Us',
-    description: 'Contact Yummy Dosa, 68 Cranbrook Rd, Ilford IG1 4NH. Phone 020 8637 3026, email info@yummydosarestaurant.co.uk.',
-  });
+  useDocumentMeta();
 
   const handleChange = (field: keyof typeof form) => (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -25,7 +22,7 @@ export default function ContactPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const text = `Hello Yummy Dosa,\n\nName: ${form.name}\nPhone: ${form.phone}\nEmail: ${form.email}\n\n${form.message}`;
-    window.open(`${RESTAURANT_INFO.whatsappUrl}?text=${encodeURIComponent(text)}`, '_blank');
+    window.open(`${RESTAURANT_INFO.whatsappUrl}?text=${encodeURIComponent(text)}`, '_blank', 'noopener,noreferrer');
     setSent(true);
   };
 
@@ -35,7 +32,7 @@ export default function ContactPage() {
         eyebrow="CONTACT"
         title="Find Yummy Dosa"
         description={BUSINESS.address.full}
-        image={encodeURI('/images/contact hero image.png')}
+        image={'/images/contact-hero.webp'}
         imageAspect="2171/724"
         height="compact"
       />
@@ -48,14 +45,14 @@ export default function ContactPage() {
             <div className="flex items-start gap-3">
               <MapPin className="w-5 h-5 text-[#D9531E] shrink-0 mt-0.5" />
               <div>
-                <h3 className="font-bold text-stone-900 text-sm">Address</h3>
+                <h2 className="font-bold text-stone-900 text-sm">Address</h2>
                 <p className="text-stone-600 text-sm mt-1">{BUSINESS.address.full}</p>
               </div>
             </div>
             <div className="flex items-start gap-3">
               <Phone className="w-5 h-5 text-[#D9531E] shrink-0 mt-0.5" />
               <div>
-                <h3 className="font-bold text-stone-900 text-sm">Phone</h3>
+                <h2 className="font-bold text-stone-900 text-sm">Phone</h2>
                 <a href={`tel:${RESTAURANT_INFO.displayPhone.replace(/\s+/g, '')}`} className="text-stone-600 text-sm mt-1 block hover:text-[#D9531E]">
                   {BUSINESS.phoneDisplay}
                 </a>
@@ -64,7 +61,7 @@ export default function ContactPage() {
             <div className="flex items-start gap-3">
               <Mail className="w-5 h-5 text-[#D9531E] shrink-0 mt-0.5" />
               <div>
-                <h3 className="font-bold text-stone-900 text-sm">Email</h3>
+                <h2 className="font-bold text-stone-900 text-sm">Email</h2>
                 <a href={`mailto:${BUSINESS.email}`} className="text-stone-600 text-sm mt-1 block hover:text-[#D9531E]">
                   {BUSINESS.email}
                 </a>
@@ -73,7 +70,7 @@ export default function ContactPage() {
             <div className="flex items-start gap-3">
               <Clock className="w-5 h-5 text-[#D9531E] shrink-0 mt-0.5" />
               <div>
-                <h3 className="font-bold text-stone-900 text-sm">Opening Hours</h3>
+                <h2 className="font-bold text-stone-900 text-sm">Opening Hours</h2>
                 <ul className="text-stone-600 text-sm mt-1 space-y-0.5">
                   {BUSINESS.hours.map((h) => (
                     <li key={h.days}>{h.days}: {h.time}</li>

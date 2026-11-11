@@ -59,7 +59,7 @@ export const MenuSection: React.FC<MenuSectionProps> = ({ onOrderWhatsApp }) => 
                       <h3 className="font-bold text-stone-900 text-sm group-hover:text-[#D9531E] transition-colors">
                         {group.label}
                       </h3>
-                      <p className="text-stone-400 text-xs mt-1">{count} items</p>
+                      <p className="text-stone-500 text-xs mt-1">{count} items</p>
                     </div>
                   </Link>
                 </motion.div>

@@ -18,7 +18,7 @@ export const RESTAURANT_INFO = {
   whatsappUrl: `https://wa.me/${BUSINESS.phoneDigits}`,
   hours: BUSINESS.hours,
   hoursShort: 'Mon–Fri 8AM–11PM · Sat–Sun 9AM–11PM',
-  heroBg: '/images/hero-bg.png',
+  heroBg: '/images/hero-bg.webp',
   get signatureDosaImg() {
     return this.heroBg;
   },

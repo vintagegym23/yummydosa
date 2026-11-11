@@ -8,6 +8,7 @@ Promotional material supplied by the Yummy Dosa client. These files are **refere
 | `catering-and-add-ons-menu.png` | Full catering & add-ons price list |
 | `morning-buffet-flyer.png` | Weekend morning buffet |
 | `unlimited-lunch-flyer.png` | Weekend unlimited lunch (thali) |
+| `menu-photo-originals/` | Full-resolution originals of the restaurant's own dish photos. The site serves the optimised copies in `public/images/menu/photos/own/`. |
 
 ---
 

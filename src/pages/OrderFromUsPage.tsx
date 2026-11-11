@@ -11,10 +11,7 @@ import { useDocumentMeta } from '../hooks/useDocumentMeta';
  * (no logo there -- the embedded page shows its own).
  */
 export default function OrderFromUsPage() {
-  useDocumentMeta({
-    title: 'Order From Us',
-    description: 'Order Yummy Dosa direct for collection or delivery -- order through our website and get 10% off.',
-  });
+  useDocumentMeta();
 
   return (
     <div className="flex flex-col h-dvh bg-white">

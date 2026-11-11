@@ -63,11 +63,7 @@ export default function MenuPage() {
   const [detailItem, setDetailItem] = useState<MenuCatalogItem | null>(null);
   const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
 
-  useDocumentMeta({
-    title: 'Full Menu',
-    description:
-      'The complete Yummy Dosa menu -- dosas, rava dosas, special dosas, South Indian tiffin, thalis, chaat, starters, drinks and desserts. 100% pure vegetarian.',
-  });
+  useDocumentMeta();
 
   const results = useMemo(() => (query ? searchMenuItems(query) : null), [query]);
 
@@ -108,7 +104,7 @@ export default function MenuPage() {
           </>
         }
         primaryAction={{ label: 'Order Online', to: '/order-online' }}
-        image={encodeURI('/images/menu hero image.png')}
+        image={'/images/menu-hero.webp'}
         height="compact"
       />
       <Breadcrumbs items={[{ label: 'Menu' }]} />

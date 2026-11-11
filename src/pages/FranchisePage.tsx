@@ -7,7 +7,7 @@ import { Reveal } from '../components/motion/Reveal';
 import { StaggerGroup, StaggerItem } from '../components/motion/Stagger';
 import { SPRING_SNAPPY } from '../components/motion/variants';
 import { useDocumentMeta } from '../hooks/useDocumentMeta';
-import { FRANCHISE_CONTENT, BUSINESS, WHATSAPP_TEST_NUMBER } from '../data/content';
+import { FRANCHISE_CONTENT, BUSINESS, ENQUIRY_WHATSAPP } from '../data/content';
 
 const SUPPORT_ICONS = [MapPin, Users, TrendingUp];
 const franchiseDigits = BUSINESS.franchiseContact.phone.replace(/\D/g, '');
@@ -16,10 +16,7 @@ export default function FranchisePage() {
   const [form, setForm] = useState({ name: '', phone: '', email: '', city: '', message: '' });
   const [sent, setSent] = useState(false);
 
-  useDocumentMeta({
-    title: 'Franchise',
-    description: 'Own a Yummy Dosa franchise -- location, setup, staff training, operations and marketing support for a growing South Indian vegetarian restaurant brand.',
-  });
+  useDocumentMeta();
 
   const handleChange = (field: keyof typeof form) => (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -28,7 +25,7 @@ export default function FranchisePage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const text = `Hello, I'm interested in a Yummy Dosa franchise.\n\nName: ${form.name}\nPhone: ${form.phone}\nEmail: ${form.email}\nCity/Territory of interest: ${form.city}\nMessage: ${form.message || 'None'}`;
-    window.open(`https://wa.me/${WHATSAPP_TEST_NUMBER}?text=${encodeURIComponent(text)}`, '_blank');
+    window.open(`https://wa.me/${ENQUIRY_WHATSAPP.franchise}?text=${encodeURIComponent(text)}`, '_blank', 'noopener,noreferrer');
     setSent(true);
   };
 
@@ -38,7 +35,7 @@ export default function FranchisePage() {
         eyebrow="FRANCHISE"
         title={FRANCHISE_CONTENT.headline}
         description={FRANCHISE_CONTENT.intro}
-        image={encodeURI('/images/Franchise us hero.png')}
+        image={'/images/franchise-hero.webp'}
         imageAspect="2163/727"
         primaryAction={{ label: 'Enquire About Franchising', href: '#enquiry' }}
         height="tall"

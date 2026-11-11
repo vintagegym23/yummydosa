@@ -22,10 +22,7 @@ export default function BookTablePage() {
   });
   const [sent, setSent] = useState(false);
 
-  useDocumentMeta({
-    title: 'Book a Table',
-    description: 'Reserve a table at Yummy Dosa, 68 Cranbrook Rd, Ilford. Send your booking request directly via WhatsApp.',
-  });
+  useDocumentMeta();
 
   const handleChange = (field: keyof typeof form) => (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -34,7 +31,7 @@ export default function BookTablePage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const text = `Hello Yummy Dosa! I'd like to book a table.\n\nName: ${form.name}\nPhone: ${form.phone}\nEmail: ${form.email}\nDate: ${form.date}\nTime: ${form.time}\nGuests: ${form.guests}\nSpecial request: ${form.notes || 'None'}`;
-    window.open(`${RESTAURANT_INFO.whatsappUrl}?text=${encodeURIComponent(text)}`, '_blank');
+    window.open(`${RESTAURANT_INFO.whatsappUrl}?text=${encodeURIComponent(text)}`, '_blank', 'noopener,noreferrer');
     setSent(true);
   };
 
@@ -44,7 +41,7 @@ export default function BookTablePage() {
         eyebrow="RESERVATIONS"
         title="Book a Table at Yummy Dosa"
         description="Join us at 68 Cranbrook Rd, Ilford for an authentic South Indian vegetarian meal."
-        image="/images/book-a-table-hero.jpg"
+        image="/images/book-a-table-hero.webp"
         align="center"
       />
       <Breadcrumbs items={[{ label: 'Book a Table' }]} />
@@ -55,7 +52,7 @@ export default function BookTablePage() {
           {WHY_DINE.map((item) => (
             <StaggerItem key={item.title} direction="up" className="bg-white rounded-2xl p-6 text-center border border-stone-100 shadow-sm">
               <item.icon className="w-7 h-7 text-[#D9531E] mx-auto mb-3" />
-              <h3 className="font-bold text-stone-900 text-sm mb-1.5">{item.title}</h3>
+              <h2 className="font-bold text-stone-900 text-sm mb-1.5">{item.title}</h2>
               <p className="text-stone-500 text-xs leading-relaxed">{item.body}</p>
             </StaggerItem>
           ))}

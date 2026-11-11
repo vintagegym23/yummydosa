@@ -3,10 +3,11 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React from 'react';
+import React, { Suspense } from 'react';
 import { useLocation, useOutlet } from 'react-router-dom';
-import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
+import { AnimatePresence, motion } from 'motion/react';
 import { DURATION, EASE_OUT } from './variants';
+import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion';
 
 /**
  * Renders the current route's element wrapped in a cross-fade + rise, keyed by pathname.
@@ -17,10 +18,12 @@ import { DURATION, EASE_OUT } from './variants';
 export const PageTransition: React.FC = () => {
   const { pathname } = useLocation();
   const outlet = useOutlet();
-  const prefersReducedMotion = useReducedMotion();
+  const prefersReducedMotion = usePrefersReducedMotion();
+  // Lazy-loaded pages suspend here, so the site chrome stays visible while a page chunk loads.
+  const page = <Suspense fallback={<div className="min-h-[70vh]" aria-busy="true" />}>{outlet}</Suspense>;
 
   if (prefersReducedMotion) {
-    return <>{outlet}</>;
+    return page;
   }
 
   return (
@@ -32,7 +35,7 @@ export const PageTransition: React.FC = () => {
         exit={{ opacity: 0, y: -10 }}
         transition={{ duration: DURATION.page, ease: EASE_OUT }}
       >
-        {outlet}
+        {page}
       </motion.div>
     </AnimatePresence>
   );

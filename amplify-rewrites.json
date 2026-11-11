@@ -1,0 +1,152 @@
+[
+  {
+    "source": "/menu/",
+    "target": "/menu",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/about/",
+    "target": "/about",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/gallery/",
+    "target": "/gallery",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/order-online/",
+    "target": "/order-online",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/orderfromus/",
+    "target": "/orderfromus",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/book-a-table/",
+    "target": "/book-a-table",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/banquet-hall/",
+    "target": "/banquet-hall",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/catering/",
+    "target": "/catering",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/franchise/",
+    "target": "/franchise",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/careers/",
+    "target": "/careers",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/contact/",
+    "target": "/contact",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/photo-credits/",
+    "target": "/photo-credits",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/menu",
+    "target": "/menu.html",
+    "status": "200",
+    "condition": null
+  },
+  {
+    "source": "/about",
+    "target": "/about.html",
+    "status": "200",
+    "condition": null
+  },
+  {
+    "source": "/gallery",
+    "target": "/gallery.html",
+    "status": "200",
+    "condition": null
+  },
+  {
+    "source": "/order-online",
+    "target": "/order-online.html",
+    "status": "200",
+    "condition": null
+  },
+  {
+    "source": "/orderfromus",
+    "target": "/orderfromus.html",
+    "status": "200",
+    "condition": null
+  },
+  {
+    "source": "/book-a-table",
+    "target": "/book-a-table.html",
+    "status": "200",
+    "condition": null
+  },
+  {
+    "source": "/banquet-hall",
+    "target": "/banquet-hall.html",
+    "status": "200",
+    "condition": null
+  },
+  {
+    "source": "/catering",
+    "target": "/catering.html",
+    "status": "200",
+    "condition": null
+  },
+  {
+    "source": "/franchise",
+    "target": "/franchise.html",
+    "status": "200",
+    "condition": null
+  },
+  {
+    "source": "/careers",
+    "target": "/careers.html",
+    "status": "200",
+    "condition": null
+  },
+  {
+    "source": "/contact",
+    "target": "/contact.html",
+    "status": "200",
+    "condition": null
+  },
+  {
+    "source": "/photo-credits",
+    "target": "/photo-credits.html",
+    "status": "200",
+    "condition": null
+  },
+  {
+    "source": "/<*>",
+    "target": "/404.html",
+    "status": "404",
+    "condition": null
+  }
+]

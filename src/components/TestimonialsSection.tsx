@@ -43,7 +43,7 @@ export const TestimonialsSection: React.FC = () => {
               ))}
             </StaggerGroup>
             <p className="text-stone-500 text-sm font-medium">
-              Based on {BUSINESS.googleRating.reviewCount.toLocaleString()} Google reviews
+              Based on {BUSINESS.googleRating.reviewCount.toLocaleString('en-GB')} Google reviews
             </p>
           </div>
           <RestaurantGuruBadge />

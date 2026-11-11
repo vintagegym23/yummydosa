@@ -1,38 +1,21 @@
 import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import { renderHeadTags } from '../seo/head';
 
-interface DocumentMetaOptions {
-  title: string;
-  description: string;
-  image?: string;
-}
+/**
+ * Keeps <head> (title, description, canonical, robots, Open Graph, Twitter, JSON-LD) in
+ * sync with the current route on client-side navigation. Per-page values live in
+ * src/seo/pages.ts; the same tags are baked into each page's static HTML at build time.
+ */
+export function useDocumentMeta() {
+  const { pathname } = useLocation();
 
-function setMetaTag(attr: 'name' | 'property', key: string, content: string) {
-  let el = document.head.querySelector(`meta[${attr}="${key}"]`);
-  if (!el) {
-    el = document.createElement('meta');
-    el.setAttribute(attr, key);
-    document.head.appendChild(el);
-  }
-  el.setAttribute('content', content);
-}
-
-/** Sets per-page title, meta description, canonical URL and OpenGraph tags on mount. */
-export function useDocumentMeta({ title, description, image }: DocumentMetaOptions) {
   useEffect(() => {
-    const fullTitle = `${title} | Yummy Dosa`;
-    document.title = fullTitle;
-    setMetaTag('name', 'description', description);
-    setMetaTag('property', 'og:title', fullTitle);
-    setMetaTag('property', 'og:description', description);
-    setMetaTag('property', 'og:url', window.location.href);
-    if (image) setMetaTag('property', 'og:image', image);
-
-    let canonical = document.head.querySelector('link[rel="canonical"]');
-    if (!canonical) {
-      canonical = document.createElement('link');
-      canonical.setAttribute('rel', 'canonical');
-      document.head.appendChild(canonical);
-    }
-    canonical.setAttribute('href', window.location.origin + window.location.pathname);
-  }, [title, description, image]);
+    document.head.querySelectorAll('[data-seo]').forEach((el) => el.remove());
+    // The plain <title>/description in index.html (dev server only) would otherwise duplicate ours.
+    document.head.querySelectorAll('title, meta[name="description"]').forEach((el) => el.remove());
+    const template = document.createElement('template');
+    template.innerHTML = renderHeadTags(pathname);
+    document.head.append(template.content);
+  }, [pathname]);
 }

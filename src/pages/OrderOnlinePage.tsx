@@ -12,10 +12,10 @@ import { useDocumentMeta } from '../hooks/useDocumentMeta';
 
 /** Real partner/brand logos, supplied directly by the client (public/logos/). */
 const LOGO_IMAGE: Record<string, string> = {
-  justeat: encodeURI('/logos/just-eat logo.png'),
-  ubereats: encodeURI('/logos/ubereats logo.png'),
-  deliveroo: encodeURI('/logos/deliveroo logo.png'),
-  direct: encodeURI('/logos/logo.png'),
+  justeat: '/logos/just-eat.png',
+  ubereats: '/logos/uber-eats.png',
+  deliveroo: '/logos/deliveroo.png',
+  direct: '/logo.webp',
 };
 
 const PlatformLink: React.FC<{
@@ -45,10 +45,7 @@ const PlatformLink: React.FC<{
 };
 
 export default function OrderOnlinePage() {
-  useDocumentMeta({
-    title: 'Order Online',
-    description: 'Order Yummy Dosa for delivery via Just Eat, Uber Eats and Deliveroo, or order direct.',
-  });
+  useDocumentMeta();
 
   const [justeat, ubereats, deliveroo, direct] = ORDERING_LOGO_LINKS;
 
@@ -64,7 +61,8 @@ export default function OrderOnlinePage() {
       />
       <Breadcrumbs items={[{ label: 'Order Online' }]} />
 
-      <section className="py-16 bg-[#FFFDF7]">
+      {/* overflow-x-clip: on phones the 10% badge glow pokes past the screen edge and caused sideways scroll */}
+      <section className="py-16 bg-[#FFFDF7] overflow-x-clip">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Delivery partners -- 3 columns */}
           <StaggerGroup className="grid grid-cols-3 gap-4 sm:gap-6">
@@ -117,7 +115,7 @@ export default function OrderOnlinePage() {
             </motion.div>
           </Reveal>
 
-          <p className="text-center text-stone-400 text-xs mt-10">
+          <p className="text-center text-stone-500 text-xs mt-10">
             <Link to="/menu" className="underline hover:text-[#D9531E]">
               Browse the full menu
             </Link>{' '}

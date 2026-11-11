@@ -1,11 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Volume2, VolumeX, Video } from 'lucide-react';
-import { useReducedMotion } from 'motion/react';
+
 import { Reveal } from './motion/Reveal';
 import { StaggerGroup, StaggerItem } from './motion/Stagger';
+import { usePrefersReducedMotion } from '../hooks/usePrefersReducedMotion';
 
-/** Customer video reviews filmed in the restaurant (public/review videos/, portrait phone clips). */
-const VIDEO_REVIEWS = [1, 2, 3, 4, 5].map((n) => encodeURI(`/review videos/${n}.mp4`));
+/** Customer video reviews filmed in the restaurant (public/videos/reviews/, portrait phone clips). */
+const VIDEO_REVIEWS = [1, 2, 3, 4, 5].map((n) => `/videos/reviews/review-${n}.mp4`);
 
 /** Muted previews loop just the opening seconds of each clip. */
 const PREVIEW_SECONDS = 5;
@@ -23,7 +24,7 @@ export const VideoReviewsSection: React.FC = () => {
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const [inView, setInView] = useState(false);
   const [unmuted, setUnmuted] = useState<number | null>(null);
-  const prefersReducedMotion = useReducedMotion();
+  const prefersReducedMotion = usePrefersReducedMotion();
 
   // Play the previews only while the section is visible.
   useEffect(() => {

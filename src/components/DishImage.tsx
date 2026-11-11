@@ -23,6 +23,9 @@ interface DishImageProps {
  * src/data/demoImages.ts. Anything without a photo -- or that fails to load -- shows a
  * "Photo coming soon" placeholder rather than an unrelated image.
  */
+/** Widths requested from Unsplash's resizing CDN for demo photos (the browser picks one via `sizes`). */
+const DEMO_WIDTHS = [400, 800, 1600];
+
 export const DishImage: React.FC<DishImageProps> = ({
   imageId,
   demoKey,
@@ -50,9 +53,10 @@ export const DishImage: React.FC<DishImageProps> = ({
     );
   }
 
-  return (
+  const img = (
     <img
       src={src}
+      srcSet={demo ? DEMO_WIDTHS.map((w) => `${demo.url(w)} ${w}w`).join(', ') : undefined}
       alt={alt}
       className={className}
       sizes={sizes}
@@ -62,4 +66,18 @@ export const DishImage: React.FC<DishImageProps> = ({
       onError={() => setFailed(true)}
     />
   );
+
+  // Production builds also ship WebP copies of every menu photo at 400 and 800px wide
+  // (scripts/image-variants.mjs), so phones get a much smaller file for small cards.
+  // display: contents keeps <picture> out of the layout, so the <img> styles behave as before.
+  if (photo && import.meta.env.PROD) {
+    const base = src.replace(/\.jpe?g$/i, '');
+    return (
+      <picture className="contents">
+        <source type="image/webp" srcSet={`${base}.400.webp 400w, ${base}.800.webp 800w`} sizes={sizes} />
+        {img}
+      </picture>
+    );
+  }
+  return img;
 };

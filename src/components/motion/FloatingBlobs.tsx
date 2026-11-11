@@ -4,7 +4,8 @@
  */
 
 import React from 'react';
-import { motion, useReducedMotion } from 'motion/react';
+import { motion } from 'motion/react';
+import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion';
 
 interface FloatingBlobsProps {
   /** 'warm' for orange/amber glows, 'cool' for emerald glows. */
@@ -17,7 +18,7 @@ interface FloatingBlobsProps {
  * (aria-hidden), GPU-cheap (transform-only), and skipped entirely for reduced-motion users.
  */
 export const FloatingBlobs: React.FC<FloatingBlobsProps> = ({ tone = 'cool', className = '' }) => {
-  const prefersReducedMotion = useReducedMotion();
+  const prefersReducedMotion = usePrefersReducedMotion();
   const colorA = tone === 'warm' ? 'bg-amber-500/10' : 'bg-emerald-500/10';
   const colorB = tone === 'warm' ? 'bg-orange-500/10' : 'bg-white/5';
 

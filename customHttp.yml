@@ -1,0 +1,119 @@
+# AWS Amplify Hosting custom response headers. Amplify reads this file from the
+# repo root on every deploy, and it overrides headers set in the console.
+#
+# Patterns deliberately don't overlap for the same header key: security headers
+# go on every path ('**'), and each Cache-Control rule targets its own folder.
+customHeaders:
+  # Security headers for every response.
+  - pattern: '**'
+    headers:
+      - key: 'Strict-Transport-Security'
+        value: 'max-age=31536000'
+      - key: 'X-Content-Type-Options'
+        value: 'nosniff'
+      - key: 'X-Frame-Options'
+        value: 'SAMEORIGIN'
+      - key: 'Referrer-Policy'
+        value: 'strict-origin-when-cross-origin'
+      - key: 'Permissions-Policy'
+        # The /orderfromus PocketOrder iframe may ask for payment + location; everything else is off.
+        value: 'camera=(), microphone=(), usb=(), geolocation=(self "https://pocketorder.co.uk"), payment=(self "https://pocketorder.co.uk")'
+      - key: 'Content-Security-Policy'
+        # Third parties in use: Restaurant Guru award badge (awards.infcdn.net),
+        # Unsplash demo photos, Google Maps + PocketOrder iframes. 'unsafe-inline' styles are
+        # needed by the animation library (inline style attributes). frame-src allows any
+        # HTTPS frame because the PocketOrder checkout can hand off to payment providers.
+        value: "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://awards.infcdn.net; font-src 'self' data: https://awards.infcdn.net; img-src 'self' data: https://images.unsplash.com https://awards.infcdn.net; media-src 'self'; frame-src https:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; upgrade-insecure-requests"
+
+  # Vite output: file names contain a content hash, so they can be cached forever.
+  - pattern: '/assets/*'
+    headers:
+      - key: 'Cache-Control'
+        value: 'public, max-age=31536000, immutable'
+
+  # Photos, videos and logos keep stable names, so cache for a week and revalidate after.
+  - pattern: '/images/**'
+    headers:
+      - key: 'Cache-Control'
+        value: 'public, max-age=604800, stale-while-revalidate=86400'
+  - pattern: '/videos/**'
+    headers:
+      - key: 'Cache-Control'
+        value: 'public, max-age=604800, stale-while-revalidate=86400'
+  - pattern: '/og/*'
+    headers:
+      - key: 'Cache-Control'
+        value: 'public, max-age=604800, stale-while-revalidate=86400'
+  - pattern: '/logos/*'
+    headers:
+      - key: 'Cache-Control'
+        value: 'public, max-age=604800, stale-while-revalidate=86400'
+
+  # Prerendered pages (and their clean URLs) must always be revalidated, so visitors get a new
+  # deploy straight away. One entry per route: keep in step with src/seo/pages.ts (the build warns).
+  - pattern: '/*.html'
+    headers:
+      - key: 'Cache-Control'
+        value: 'no-cache'
+  - pattern: '/'
+    headers:
+      - key: 'Cache-Control'
+        value: 'no-cache'
+  - pattern: '/menu'
+    headers:
+      - key: 'Cache-Control'
+        value: 'no-cache'
+  - pattern: '/about'
+    headers:
+      - key: 'Cache-Control'
+        value: 'no-cache'
+  - pattern: '/gallery'
+    headers:
+      - key: 'Cache-Control'
+        value: 'no-cache'
+  - pattern: '/order-online'
+    headers:
+      - key: 'Cache-Control'
+        value: 'no-cache'
+  - pattern: '/orderfromus'
+    headers:
+      - key: 'Cache-Control'
+        value: 'no-cache'
+  - pattern: '/book-a-table'
+    headers:
+      - key: 'Cache-Control'
+        value: 'no-cache'
+  - pattern: '/banquet-hall'
+    headers:
+      - key: 'Cache-Control'
+        value: 'no-cache'
+  - pattern: '/catering'
+    headers:
+      - key: 'Cache-Control'
+        value: 'no-cache'
+  - pattern: '/franchise'
+    headers:
+      - key: 'Cache-Control'
+        value: 'no-cache'
+  - pattern: '/careers'
+    headers:
+      - key: 'Cache-Control'
+        value: 'no-cache'
+  - pattern: '/contact'
+    headers:
+      - key: 'Cache-Control'
+        value: 'no-cache'
+  - pattern: '/photo-credits'
+    headers:
+      - key: 'Cache-Control'
+        value: 'no-cache'
+
+  # Crawler files: short cache so sitemap/robots changes are picked up quickly.
+  - pattern: '/robots.txt'
+    headers:
+      - key: 'Cache-Control'
+        value: 'public, max-age=3600'
+  - pattern: '/sitemap.xml'
+    headers:
+      - key: 'Cache-Control'
+        value: 'public, max-age=3600'

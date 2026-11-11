@@ -55,7 +55,7 @@ export const Footer: React.FC = () => {
 
           {/* Quick Links */}
           <StaggerItem direction="up" className="md:col-span-4 space-y-3">
-            <h4 className="text-white font-bold text-xs uppercase tracking-wider">Explore</h4>
+            <h2 className="text-white font-bold text-xs uppercase tracking-wider">Explore</h2>
             <ul className="grid grid-cols-2 gap-x-4 gap-y-2 text-xs">
               {PAGE_LINKS.map((link) => (
                 <li key={link.to}>
@@ -69,7 +69,7 @@ export const Footer: React.FC = () => {
 
           {/* Hours */}
           <StaggerItem direction="up" className="md:col-span-3 space-y-3">
-            <h4 className="text-white font-bold text-xs uppercase tracking-wider">Opening Hours</h4>
+            <h2 className="text-white font-bold text-xs uppercase tracking-wider">Opening Hours</h2>
             <ul className="space-y-2 text-xs">
               {BUSINESS.hours.map((h) => (
                 <li key={h.days}>
@@ -84,7 +84,7 @@ export const Footer: React.FC = () => {
 
         {/* Copyright Notice */}
         <Reveal delay={0.1} className="pt-8 text-center text-xs text-stone-500 font-medium">
-          © {new Date().getFullYear()} Yummy Dosa. All rights reserved.
+          <span suppressHydrationWarning>© {new Date().getFullYear()}</span> Yummy Dosa. All rights reserved.
           <span className="mx-2 text-stone-600">·</span>
           <Link to="/photo-credits" className="hover:text-amber-400 transition-colors">
             Photo credits

@@ -4,8 +4,9 @@
  */
 
 import React from 'react';
-import { motion, useReducedMotion } from 'motion/react';
+import { motion } from 'motion/react';
 import { DURATION, EASE_OUT, STAGGER_CONTAINER, VIEWPORT_ONCE, directionalVariants } from './variants';
+import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion';
 
 interface StaggerGroupProps {
   children: React.ReactNode;
@@ -17,7 +18,7 @@ interface StaggerGroupProps {
 
 /** Container that reveals its StaggerItem children one after another as it scrolls into view. */
 export const StaggerGroup: React.FC<StaggerGroupProps> = ({ children, className, as = 'div', stagger }) => {
-  const prefersReducedMotion = useReducedMotion();
+  const prefersReducedMotion = usePrefersReducedMotion();
   const MotionTag = motion[as];
 
   if (prefersReducedMotion) {

@@ -17,11 +17,7 @@ import { BUSINESS, SERVICES_CONTENT } from '../data/content';
 export default function HomePage() {
   const { openOrderModal } = useOrderModal();
 
-  useDocumentMeta({
-    title: 'South Indian Vegetarian Restaurant in Ilford',
-    description:
-      'Yummy Dosa is a South Indian pure vegetarian restaurant in Ilford, London -- dosas, tiffin, thalis, chaat and more, inspired by Tamil Nadu, Karnataka, Kerala, Andhra Pradesh and Telangana.',
-  });
+  useDocumentMeta();
 
   return (
     <>
@@ -88,7 +84,7 @@ export default function HomePage() {
         reverse
       />
 
-      <LocationsSection onOpenMap={() => window.open(BUSINESS.mapsQuery, '_blank')} />
+      <LocationsSection onOpenMap={() => window.open(BUSINESS.mapsQuery, '_blank', 'noopener,noreferrer')} />
     </>
   );
 }

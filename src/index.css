@@ -1,5 +1,14 @@
 @import "tailwindcss";
 
+/* Self-hosted variable fonts (woff2, font-display: swap). Browsers download only the
+   unicode-range subsets a page actually uses -- in practice just Latin. */
+@import "@fontsource-variable/epilogue/wght.css";
+@import "@fontsource-variable/epilogue/wght-italic.css";
+@import "@fontsource-variable/playfair-display/wght.css";
+@import "@fontsource-variable/playfair-display/wght-italic.css";
+@import "@fontsource-variable/plus-jakarta-sans/wght.css";
+@import "@fontsource-variable/caveat/wght.css";
+
 html {
   scroll-behavior: smooth;
 }
@@ -10,9 +19,9 @@ body {
 }
 
 @theme {
-  --font-sans: 'Epilogue', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-serif: 'Playfair Display', Georgia, serif;
-  --font-body: 'Plus Jakarta Sans', 'Epilogue', sans-serif;
+  --font-sans: 'Epilogue Variable', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-serif: 'Playfair Display Variable', Georgia, serif;
+  --font-body: 'Plus Jakarta Sans Variable', 'Epilogue Variable', sans-serif;
 
   --color-brand-forest: #133527;
   --color-brand-deepGreen: #1b4332;
@@ -32,12 +41,12 @@ body {
 }
 
 .font-script {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Playfair Display Variable', Georgia, serif;
   font-style: italic;
 }
 
 .font-handwritten {
-  font-family: 'Caveat', 'Playfair Display', cursive;
+  font-family: 'Caveat Variable', 'Playfair Display Variable', cursive;
 }
 
 @keyframes spin-slow {

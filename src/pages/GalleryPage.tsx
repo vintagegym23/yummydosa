@@ -15,10 +15,7 @@ export default function GalleryPage() {
   const [category, setCategory] = useState<(typeof CATEGORIES)[number]>('All');
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
-  useDocumentMeta({
-    title: 'Gallery',
-    description: 'Food, restaurant, banquet hall and catering photos from Yummy Dosa, Ilford.',
-  });
+  useDocumentMeta();
 
   const filtered = useMemo(
     () => (category === 'All' ? GALLERY_IMAGES : GALLERY_IMAGES.filter((img) => img.category === category)),

@@ -62,7 +62,7 @@ export const SpecialsSection: React.FC<SpecialsSectionProps> = ({ onSelectSpecia
                     </h3>
                     <Leaf className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" aria-label="Vegetarian" />
                   </div>
-                  <p className="text-stone-400 text-xs mt-1">{item.category}</p>
+                  <p className="text-stone-500 text-xs mt-1">{item.category}</p>
                 </div>
               </motion.div>
             </StaggerItem>

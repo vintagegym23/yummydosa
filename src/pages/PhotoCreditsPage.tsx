@@ -14,10 +14,7 @@ const licenseUrl = (license: string) => {
 };
 
 export default function PhotoCreditsPage() {
-  useDocumentMeta({
-    title: 'Photo Credits',
-    description: 'Credits and licences for the photographs used on the Yummy Dosa website.',
-  });
+  useDocumentMeta();
 
   const menuPhotos = (Object.entries(MENU_PHOTOS) as [MenuPhotoKey, (typeof MENU_PHOTOS)[MenuPhotoKey]][])
     .filter(([, p]) => p.license !== 'Own photo')

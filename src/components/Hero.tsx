@@ -1,10 +1,12 @@
 import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Motorbike, Leaf, Utensils, Soup, Cookie, Coffee } from 'lucide-react';
-import { motion, useScroll, useTransform, useReducedMotion } from 'motion/react';
+import { motion, useScroll, useTransform } from 'motion/react';
 import { RESTAURANT_INFO } from '../data/restaurantData';
 import { StaggerGroup, StaggerItem } from './motion/Stagger';
 import { SPRING_SNAPPY, EASE_OUT } from './motion/variants';
+import { usePrefersReducedMotion } from '../hooks/usePrefersReducedMotion';
+import { heroSrcSet } from './heroSrcSet';
 
 interface HeroProps {
   onViewSpecials?: () => void;
@@ -21,7 +23,7 @@ const BADGE_TEXT = 'AUTHENTIC TASTE • ALWAYS FRESH • ';
 
 export const Hero: React.FC<HeroProps> = ({ onViewSpecials }) => {
   const sectionRef = useRef<HTMLElement>(null);
-  const prefersReducedMotion = useReducedMotion();
+  const prefersReducedMotion = usePrefersReducedMotion();
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ['start start', 'end start'] });
   const bgY = useTransform(scrollYProgress, [0, 1], prefersReducedMotion ? ['0%', '0%'] : ['0%', '18%']);
   const contentY = useTransform(scrollYProgress, [0, 1], prefersReducedMotion ? [0, 0] : [0, 60]);
@@ -38,9 +40,13 @@ export const Hero: React.FC<HeroProps> = ({ onViewSpecials }) => {
         <motion.img
           style={{ y: bgY }}
           src={RESTAURANT_INFO.heroBg}
+          srcSet={heroSrcSet(RESTAURANT_INFO.heroBg)}
+          sizes="100vw"
+          fetchPriority="high"
+          decoding="async"
           alt="South Indian dosa feast spread"
-          initial={{ scale: 1.15, opacity: 0 }}
-          animate={{ scale: 1.06, opacity: 1 }}
+          initial={{ scale: 1.15 }} // no fade: visible from the first (prerendered) paint for a fast LCP
+          animate={{ scale: 1.06 }}
           transition={{ duration: 1.4, ease: EASE_OUT }}
           className="absolute inset-0 w-full h-full object-cover object-[65%_center]"
         />

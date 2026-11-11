@@ -6,6 +6,7 @@ import { DishImage } from '../DishImage';
 import { DemoImageKey } from '../../data/demoImages';
 import { StaggerGroup, StaggerItem } from '../motion/Stagger';
 import { SPRING_SNAPPY, EASE_OUT } from '../motion/variants';
+import { heroSrcSet } from '../heroSrcSet';
 
 interface HeroAction {
   label: string;
@@ -107,8 +108,8 @@ export const PageHero: React.FC<PageHeroProps> = ({
       <div className="absolute inset-0 z-0 overflow-hidden">
         {imageId || demoKey ? (
           <motion.div
-            initial={{ scale: 1.12, opacity: 0 }}
-            animate={{ scale: 1.04, opacity: 1 }}
+            initial={{ scale: 1.12 }} // no fade: visible from the first (prerendered) paint for a fast LCP
+            animate={{ scale: 1.04 }}
             transition={{ duration: 1.3, ease: EASE_OUT }}
             className="absolute inset-0 w-full h-full"
           >
@@ -123,9 +124,13 @@ export const PageHero: React.FC<PageHeroProps> = ({
         ) : image ? (
           <motion.img
             src={image}
+            srcSet={heroSrcSet(image)}
+            sizes="100vw"
+            fetchPriority="high"
+            decoding="async"
             alt={title}
-            initial={{ scale: 1.12, opacity: 0 }}
-            animate={{ scale: imageAspect ? 1 : 1.04, opacity: 1 }}
+            initial={{ scale: 1.12 }} // no fade: visible from the first (prerendered) paint for a fast LCP
+            animate={{ scale: imageAspect ? 1 : 1.04 }}
             transition={{ duration: 1.3, ease: EASE_OUT }}
             className="absolute inset-0 w-full h-full object-cover object-center"
           />

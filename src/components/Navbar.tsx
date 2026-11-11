@@ -65,7 +65,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenOrderModal }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo block */}
-          <Link to="/" className="flex items-center gap-3 group focus:outline-none" aria-label="Yummy Dosa Home">
+          <Link to="/" className="flex items-center gap-3 group rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E59819] focus-visible:ring-offset-2" aria-label="Yummy Dosa Home">
             <motion.div whileTap={{ scale: 0.9 }} transition={SPRING_SNAPPY}>
               <BrandMark className="transition-transform group-hover:scale-105 duration-200" />
             </motion.div>

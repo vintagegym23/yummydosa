@@ -1,11 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Heart, Volume2, VolumeX } from 'lucide-react';
-import { motion, useReducedMotion } from 'motion/react';
+import { motion } from 'motion/react';
 import { SPRING_SNAPPY, EASE_OUT } from './motion/variants';
+import { usePrefersReducedMotion } from '../hooks/usePrefersReducedMotion';
 
-/** Guests cheering "Thank you Yummy Dosa!" (landscape clip, ~38 MB -- only fetched once the section is near). */
-const THANK_YOU_VIDEO = encodeURI('/images/thankyou yummydosa.mp4');
+/** Guests cheering "Thank you Yummy Dosa!" (720p landscape clip, ~1.8 MB -- only fetched once the section is near). */
+const THANK_YOU_VIDEO = '/videos/thank-you.mp4';
+const THANK_YOU_POSTER = '/videos/thank-you-poster.webp';
 
 /**
  * Celebration section after the video reviews: handwritten caption on the left,
@@ -17,7 +19,7 @@ export const ThankYouVideoSection: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [inView, setInView] = useState(false);
   const [unmuted, setUnmuted] = useState(false);
-  const prefersReducedMotion = useReducedMotion();
+  const prefersReducedMotion = usePrefersReducedMotion();
 
   useEffect(() => {
     const el = sectionRef.current;
@@ -80,6 +82,7 @@ export const ThankYouVideoSection: React.FC = () => {
           <video
             ref={videoRef}
             src={THANK_YOU_VIDEO}
+            poster={THANK_YOU_POSTER}
             muted
             loop
             playsInline

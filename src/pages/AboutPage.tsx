@@ -17,11 +17,7 @@ const SERVICE_CARDS = [
 ] as const;
 
 export default function AboutPage() {
-  useDocumentMeta({
-    title: 'About Us',
-    description:
-      'The story behind Yummy Dosa -- a South Indian pure vegetarian restaurant in Ilford, London, inspired by Tamil Nadu, Karnataka, Kerala, Andhra Pradesh and Telangana.',
-  });
+  useDocumentMeta();
 
   return (
     <>
@@ -29,7 +25,7 @@ export default function AboutPage() {
         eyebrow="OUR STORY"
         title="A Taste of South India in Ilford"
         description={BUSINESS.tagline}
-        image={encodeURI('/images/about hero image.png')}
+        image={'/images/about-hero.webp'}
         height="tall"
       />
       <Breadcrumbs items={[{ label: 'About' }]} />

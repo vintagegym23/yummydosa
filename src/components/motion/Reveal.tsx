@@ -4,8 +4,9 @@
  */
 
 import React from 'react';
-import { motion, useReducedMotion } from 'motion/react';
+import { motion } from 'motion/react';
 import { DURATION, EASE_OUT, VIEWPORT_ONCE, directionalVariants } from './variants';
+import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion';
 
 interface RevealProps {
   children: React.ReactNode;
@@ -30,7 +31,7 @@ export const Reveal: React.FC<RevealProps> = ({
   as = 'div',
   repeat = false,
 }: RevealProps) => {
-  const prefersReducedMotion = useReducedMotion();
+  const prefersReducedMotion = usePrefersReducedMotion();
   const MotionTag = motion[as];
   const variants = directionalVariants(direction);
 

@@ -1,26 +1,22 @@
 <!doctype html>
-<html lang="en" class="scroll-smooth">
+<html lang="en-GB" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/png" href="/logo-round.png" />
-    <link rel="apple-touch-icon" href="/logo-round.png" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#133527" />
+    <!-- Venue/event demo photos are served by Unsplash's CDN (src/data/demoImages.ts). -->
+    <link rel="preconnect" href="https://images.unsplash.com" />
+    <!-- seo:start (replaced per page at build time by scripts/prerender.mjs; see src/seo/) -->
     <title>Yummy Dosa | South Indian Vegetarian Restaurant in Ilford</title>
-    <meta name="description" content="Yummy Dosa is a South Indian pure vegetarian restaurant in Ilford, London -- dosas, tiffin, thalis, chaat and more." />
-    <meta property="og:title" content="Yummy Dosa | South Indian Vegetarian Restaurant in Ilford" />
-    <meta property="og:description" content="Yummy Dosa is a South Indian pure vegetarian restaurant in Ilford, London -- dosas, tiffin, thalis, chaat and more." />
-    <meta property="og:type" content="website" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <!-- Google Fonts: Epilogue, Playfair Display & Plus Jakarta Sans -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600;1,700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet" />
-    <!-- Restaurant Guru award badge styles (badge markup: src/components/RestaurantGuruBadge.tsx) -->
-    <link href="https://awards.infcdn.net/2026_new/badge-circledLeaves27.css" rel="stylesheet" />
+    <meta name="description" content="Yummy Dosa is a pure vegetarian South Indian restaurant in Ilford, East London, serving dosas, idli, thalis, chaat and Indo-Chinese dishes." />
+    <!-- seo:end -->
   </head>
   <body class="bg-[#FFFDF7] text-stone-800 antialiased selection:bg-[#E59819] selection:text-[#133527]">
-    <div id="root"></div>
+    <noscript>Yummy Dosa needs JavaScript enabled for some features of this site. Call us on 020 8637 3026 or visit 68 Cranbrook Road, Ilford IG1 4NH.</noscript>
+    <div id="root"><!--app-html--></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
-

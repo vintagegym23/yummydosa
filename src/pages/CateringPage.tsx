@@ -8,7 +8,7 @@ import { Reveal } from '../components/motion/Reveal';
 import { StaggerGroup, StaggerItem } from '../components/motion/Stagger';
 import { SPRING_SNAPPY } from '../components/motion/variants';
 import { useDocumentMeta } from '../hooks/useDocumentMeta';
-import { CATERING_CONTENT, CATERING_MENU, BUSINESS, WHATSAPP_TEST_NUMBER } from '../data/content';
+import { CATERING_CONTENT, CATERING_MENU, BUSINESS, ENQUIRY_WHATSAPP } from '../data/content';
 
 export default function CateringPage() {
   const [form, setForm] = useState({ name: '', phone: '', email: '', occasion: '', guests: '', message: '' });
@@ -16,10 +16,7 @@ export default function CateringPage() {
   const [occasionHighlighted, setOccasionHighlighted] = useState(false);
   const occasionRef = useRef<HTMLInputElement>(null);
 
-  useDocumentMeta({
-    title: 'Catering',
-    description: 'South Indian catering from Yummy Dosa -- corporate catering, weddings, birthdays and private parties, including a live dosa station.',
-  });
+  useDocumentMeta();
 
   const handleChange = (field: keyof typeof form) => (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -36,7 +33,7 @@ export default function CateringPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const text = `Hello, I'd like to enquire about Yummy Dosa catering.\n\nName: ${form.name}\nPhone: ${form.phone}\nEmail: ${form.email}\nOccasion: ${form.occasion}\nGuests: ${form.guests}\nMessage: ${form.message || 'None'}`;
-    window.open(`https://wa.me/${WHATSAPP_TEST_NUMBER}?text=${encodeURIComponent(text)}`, '_blank');
+    window.open(`https://wa.me/${ENQUIRY_WHATSAPP.catering}?text=${encodeURIComponent(text)}`, '_blank', 'noopener,noreferrer');
     setSent(true);
   };
 

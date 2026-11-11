@@ -7,10 +7,7 @@ import { StaggerGroup, StaggerItem } from '../components/motion/Stagger';
 import { SPRING_SNAPPY } from '../components/motion/variants';
 
 export default function NotFoundPage() {
-  useDocumentMeta({
-    title: 'Page Not Found',
-    description: 'The page you are looking for could not be found.',
-  });
+  useDocumentMeta();
 
   return (
     <div className="min-h-[60vh] flex flex-col items-center justify-center text-center px-4 py-24">

@@ -20,7 +20,7 @@ const JobCard: React.FC<{ job: (typeof JOB_OPENINGS)[number] }> = ({ job }) => {
         className="w-full flex items-center justify-between gap-4 p-6 text-left cursor-pointer"
       >
         <div>
-          <h3 className="font-bold text-stone-900 text-lg">{job.title}</h3>
+          <h2 className="font-bold text-stone-900 text-lg">{job.title}</h2>
           <p className="text-stone-500 text-sm mt-1">{job.summary}</p>
         </div>
         <motion.span animate={{ rotate: open ? 180 : 0 }} transition={{ duration: 0.25, ease: EASE_OUT }}>
@@ -39,7 +39,7 @@ const JobCard: React.FC<{ job: (typeof JOB_OPENINGS)[number] }> = ({ job }) => {
           >
             <div className="px-6 pb-6 border-t border-stone-100 pt-5 space-y-4">
               <div>
-                <h4 className="text-xs font-bold uppercase tracking-widest text-[#D9531E] mb-2">Responsibilities</h4>
+                <h3 className="text-xs font-bold uppercase tracking-widest text-[#D9531E] mb-2">Responsibilities</h3>
                 <ul className="space-y-1.5">
                   {job.responsibilities.map((item) => (
                     <li key={item} className="text-stone-600 text-sm flex items-start gap-2">
@@ -88,10 +88,7 @@ const JobCard: React.FC<{ job: (typeof JOB_OPENINGS)[number] }> = ({ job }) => {
 };
 
 export default function CareersPage() {
-  useDocumentMeta({
-    title: 'Careers',
-    description: 'Current job openings at Yummy Dosa, Ilford -- Restaurant Manager, South Indian Chettinad Chef, Indian Curry Chef, Waiter and Waitress.',
-  });
+  useDocumentMeta();
 
   return (
     <>

@@ -9,7 +9,7 @@ import { Reveal } from '../components/motion/Reveal';
 import { StaggerGroup, StaggerItem } from '../components/motion/Stagger';
 import { SPRING_SNAPPY } from '../components/motion/variants';
 import { useDocumentMeta } from '../hooks/useDocumentMeta';
-import { BANQUET_CONTENT, BUSINESS, SERVICES_CONTENT, WHATSAPP_TEST_NUMBER } from '../data/content';
+import { BANQUET_CONTENT, BUSINESS, SERVICES_CONTENT, ENQUIRY_WHATSAPP } from '../data/content';
 
 const banquetWhatsappDigits = BUSINESS.banquetContact.phone.replace(/\D/g, '');
 
@@ -19,10 +19,7 @@ export default function BanquetHallPage() {
   const [eventTypeHighlighted, setEventTypeHighlighted] = useState(false);
   const eventTypeRef = useRef<HTMLInputElement>(null);
 
-  useDocumentMeta({
-    title: 'Banquet Hall',
-    description: 'The Yummy Dosa banquet hall in Ilford hosts birthdays, weddings, engagements, corporate events and family gatherings.',
-  });
+  useDocumentMeta();
 
   const handleChange = (field: keyof typeof form) => (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -39,7 +36,7 @@ export default function BanquetHallPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const text = `Hello, I'd like to enquire about the Yummy Dosa banquet hall.\n\nName: ${form.name}\nPhone: ${form.phone}\nEmail: ${form.email}\nEvent type: ${form.eventType}\nDate: ${form.date}\nGuests: ${form.guests}\nMessage: ${form.message || 'None'}`;
-    window.open(`https://wa.me/${WHATSAPP_TEST_NUMBER}?text=${encodeURIComponent(text)}`, '_blank');
+    window.open(`https://wa.me/${ENQUIRY_WHATSAPP.banquet}?text=${encodeURIComponent(text)}`, '_blank', 'noopener,noreferrer');
     setSent(true);
   };
 

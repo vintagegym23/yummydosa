@@ -27,7 +27,7 @@ export const OrderModal: React.FC<OrderModalProps> = ({ isOpen, onClose, selecte
 
   const handleWhatsAppClick = () => {
     const message = generateWhatsAppMessage();
-    window.open(`${RESTAURANT_INFO.whatsappUrl}?text=${message}`, '_blank');
+    window.open(`${RESTAURANT_INFO.whatsappUrl}?text=${message}`, '_blank', 'noopener,noreferrer');
     onClose();
   };
 
