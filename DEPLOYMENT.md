@@ -31,7 +31,8 @@ None of these are secrets.
 3. **Environment variables:** add `VITE_SITE_URL` (see above).
 4. **Hosting → Rewrites and redirects → Manage redirects → Open text editor**: replace everything with the
    contents of `amplify-rewrites.json`. This replaces Amplify's default rule. Without it, `/menu` and other
-   pages return 404.
+   pages return 404. Afterwards the last rule (`/<*>` → `/404.html`) must show type **404 (Rewrite)**,
+   not "404 (Redirect)".
    - Or with the AWS CLI: `aws amplify update-app --app-id <APP_ID> --custom-rules file://amplify-rewrites.json`
 5. Deploy, then run the checks below against the `https://main.<id>.amplifyapp.com` URL.
 6. **Custom domain:** Hosting → Custom domains → Add domain. Amplify issues and renews the SSL certificate (ACM).

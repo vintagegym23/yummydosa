@@ -50,8 +50,9 @@ const globToRegExp = (glob) =>
 
 const headerRules = readCustomHeaders().map((r) => ({ ...r, re: globToRegExp(r.pattern) }));
 
-// Amplify rules: literal sources, `<*>` wildcard, or `</regex/>`. 404-status rules only apply
-// when no file exists at the requested path; 200/301/302 rules apply first, top to bottom.
+// Amplify rules: literal sources, `<*>` wildcard, or `</regex/>`, top to bottom. 404 rules only apply
+// when no file exists at the requested path: '404' (Redirect) 302-redirects to the target,
+// '404-200' (Rewrite) serves the target with a 404 status.
 const sourceToRegExp = (source) => {
   const regex = source.match(/^<\/(.*)\/>$/s);
   if (regex) return new RegExp(regex[1]);
@@ -83,13 +84,13 @@ createServer((req, res) => {
   if (!file.startsWith(dist)) return res.writeHead(403).end();
   let status = 200;
 
-  const rule = rewrites.find((r) => r.re.test(path) && (r.status !== '404' || !isFile(file)));
-  if (rule?.status === '301' || rule?.status === '302') {
-    return res.writeHead(Number(rule.status), { Location: rule.target + url.search }).end();
+  const rule = rewrites.find((r) => r.re.test(path) && (!r.status.startsWith('404') || !isFile(file)));
+  if (rule?.status === '301' || rule?.status === '302' || rule?.status === '404') {
+    return res.writeHead(rule.status === '404' ? 302 : Number(rule.status), { Location: rule.target + url.search }).end();
   }
   if (rule) {
     file = fileAt(rule.target);
-    status = Number(rule.status === '404-200' ? 200 : rule.status);
+    status = rule.status === '404-200' ? 404 : Number(rule.status);
   }
   if (!isFile(file)) return res.writeHead(404, { 'Content-Type': 'text/plain' }).end('404 Not Found');
 

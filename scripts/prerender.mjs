@@ -104,7 +104,9 @@ const pageRoutes = Object.keys(PAGES).filter((r) => r !== '/');
 const rules = [
   ...pageRoutes.map((r) => ({ source: `${r}/`, target: r, status: '301', condition: null })),
   ...pageRoutes.map((r) => ({ source: r, target: `${r}.html`, status: '200', condition: null })),
-  { source: '/<*>', target: '/404.html', status: '404', condition: null },
+  // '404-200' = Amplify "404 (Rewrite)": serves 404.html with a 404 status at the requested URL.
+  // (Plain '404' is "404 (Redirect)", which 302-redirects to /404.html instead.)
+  { source: '/<*>', target: '/404.html', status: '404-200', condition: null },
 ];
 const rulesFile = join(root, 'amplify-rewrites.json');
 const rulesJson = JSON.stringify(rules, null, 2) + '\n';
