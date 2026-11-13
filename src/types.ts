@@ -57,6 +57,19 @@ export interface JobOpening {
   responsibilities: string[];
   location: string;
   contact: { name?: string; phone?: string; email?: string };
+  /** Optional fuller advert, shown when the listing is opened. */
+  intro?: string;
+  employment?: 'Full-Time' | 'Part-Time';
+  /** Gross annual salary in GBP. */
+  salaryPerYear?: number;
+  hoursPerWeek?: number;
+  reportsTo?: string;
+  requirements?: string[];
+  /**
+   * ISO date the advert was published. Only listings with a date get JobPosting structured
+   * data (Google for Jobs); remove the listing once the role is filled.
+   */
+  datePosted?: string;
 }
 
 export interface GalleryImage {

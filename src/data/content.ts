@@ -320,8 +320,40 @@ export const FRANCHISE_CONTENT = {
   ],
 };
 
-/** info.md section 35: the three real job listings, with their actually-documented responsibilities. */
+/** Current job listings (newest first), with their actually-documented responsibilities. */
 export const JOB_OPENINGS: JobOpening[] = [
+  {
+    id: 'qa-development-chef',
+    title: 'Quality Assurance and Development Chef',
+    summary: 'Full-time role overseeing food quality standards, food safety compliance and product development.',
+    intro:
+      'Yummy Dosa, a 100% vegetarian Indian restaurant specialising in South Indian and North Indian cuisine, is seeking a skilled Quality Assurance and Development Chef to oversee food quality standards, food safety compliance and product development.',
+    employment: 'Full-Time',
+    salaryPerYear: 33800,
+    hoursPerWeek: 37.5,
+    reportsTo: 'Restaurant Director / Management',
+    responsibilities: [
+      'Develop, implement and monitor food quality assurance procedures and HACCP-based food safety systems.',
+      'Conduct regular food quality inspections, hygiene audits and regulatory compliance checks.',
+      'Maintain accurate records of quality inspections, non-conformities and corrective actions.',
+      'Standardise recipes, ingredient specifications, portion sizes and presentation standards across South Indian and North Indian vegetarian dishes.',
+      'Coordinate new menu product trials, quality evaluations and improvements to existing recipes.',
+      'Monitor supplier quality, ingredient traceability, storage standards and food-related wastage.',
+      'Investigate customer food quality complaints, identify root causes and implement preventive measures.',
+      'Train kitchen staff on food quality procedures, allergen management and food safety standards.',
+      'Prepare periodic quality assurance and compliance reports for management.',
+    ],
+    requirements: [
+      'Relevant experience in food quality assurance, food safety compliance or food product development.',
+      'Good understanding of HACCP principles, UK food safety regulations and allergen management.',
+      'Experience conducting quality audits, maintaining compliance records and implementing corrective actions.',
+      'Strong organisational, analytical, communication and reporting skills.',
+      'Knowledge of Indian vegetarian cuisine and restaurant operations is desirable.',
+    ],
+    location: 'Yummy Dosa, 68 Cranbrook Rd, Ilford IG1 4NH',
+    contact: { phone: BUSINESS.recruitmentContact.phone, email: BUSINESS.recruitmentContact.email },
+    datePosted: '2026-11-13',
+  },
   {
     id: 'restaurant-manager',
     title: 'Restaurant Manager / Assistant Manager',

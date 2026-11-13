@@ -24,7 +24,8 @@ export interface PageSeo {
 const DEFAULT_OG = { ogImage: '/og/home.jpg', ogImageAlt: 'A crispy masala dosa served with sambar and chutneys at Yummy Dosa' };
 
 const menuCount = Math.floor(MENU_ITEMS.length / 10) * 10; // "more than 220" -- stays true as the menu changes
-const jobTitles = JOB_OPENINGS.map((job) => job.title.split(' / ')[0]).join(', ');
+// Newest listing named in full; the rest summarised, so the description stays under ~160 characters.
+const jobsSummary = `${JOB_OPENINGS[0].title} and ${JOB_OPENINGS.length - 1} more roles`;
 
 /**
  * Every indexable route and its search metadata. The prerender script renders each of
@@ -106,7 +107,7 @@ export const PAGES: Record<string, PageSeo> = {
   },
   '/careers': {
     title: 'Careers: Restaurant Jobs in Ilford | Yummy Dosa',
-    description: `Now hiring at Yummy Dosa, Ilford: ${jobTitles}. See each role and how to apply.`,
+    description: `Now hiring at Yummy Dosa, Ilford: ${jobsSummary} in our kitchen and dining room. See each role and how to apply.`,
     ...DEFAULT_OG,
     breadcrumb: 'Careers',
   },

@@ -5,9 +5,11 @@
  * Deliberately left out:
  * - aggregateRating / reviews: the Google rating shown on the site comes from a third party,
  *   and Google's guidelines don't allow marking that up on the business's own site.
- * - priceRange, vegan diet claims, JobPosting (the job data has no posting/closing dates).
+ * - priceRange, vegan diet claims.
+ * - JobPosting for listings without a `datePosted` (Google requires one).
  */
-import { BUSINESS, SOCIAL_LINKS, SERVICES_CONTENT } from '../data/content';
+import { BUSINESS, SOCIAL_LINKS, SERVICES_CONTENT, JOB_OPENINGS } from '../data/content';
+import type { JobOpening } from '../types';
 import { MENU_ITEMS } from '../data/menu';
 import { SITE_NAME, SITE_URL, absoluteUrl, type PageSeo } from './pages';
 
@@ -147,6 +149,49 @@ function serviceSchema(path: string, name: string, description: string, areaServ
   };
 }
 
+const escapeHtml = (t: string) => t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+const htmlList = (title: string, items: string[]) =>
+  `<h3>${title}</h3><ul>${items.map((i) => `<li>${escapeHtml(i)}</li>`).join('')}</ul>`;
+
+/** Google for Jobs listing, built from the same data the Careers page shows. */
+function jobPostingSchema(job: JobOpening): Json {
+  const description = [
+    `<p>${escapeHtml(job.intro ?? job.summary)}</p>`,
+    job.reportsTo ? `<p>Reports to: ${escapeHtml(job.reportsTo)}</p>` : '',
+    htmlList('Key Responsibilities', job.responsibilities),
+    job.requirements ? htmlList('Skills and Experience', job.requirements) : '',
+    job.contact.email ? `<p>To apply, email your CV to ${escapeHtml(job.contact.email)}${job.contact.phone ? ` or message us on WhatsApp at ${escapeHtml(job.contact.phone)}` : ''}.</p>` : '',
+  ].join('');
+  return {
+    '@type': 'JobPosting',
+    '@id': `${absoluteUrl('/careers')}#${job.id}`,
+    title: job.title,
+    description,
+    datePosted: job.datePosted,
+    url: absoluteUrl('/careers'),
+    identifier: { '@type': 'PropertyValue', name: 'Yummy Dosa Ltd', value: job.id },
+    hiringOrganization: {
+      '@type': 'Organization',
+      name: 'Yummy Dosa Ltd',
+      sameAs: absoluteUrl('/'),
+      logo: `${SITE_URL}/favicon-192.png`,
+    },
+    jobLocation: { '@type': 'Place', address: postalAddress },
+    directApply: false,
+    ...(job.employment ? { employmentType: job.employment === 'Full-Time' ? 'FULL_TIME' : 'PART_TIME' } : {}),
+    ...(job.salaryPerYear
+      ? {
+          baseSalary: {
+            '@type': 'MonetaryAmount',
+            currency: 'GBP',
+            value: { '@type': 'QuantitativeValue', value: job.salaryPerYear, unitText: 'YEAR' },
+          },
+        }
+      : {}),
+    ...(job.hoursPerWeek ? { workHours: `${job.hoursPerWeek} hours per week` } : {}),
+  };
+}
+
 /** The @graph for a page. Unknown/noindex pages get none. */
 export function pageSchema(path: string | null, seo: PageSeo): Json | null {
   if (!path || seo.noindex) return null;
@@ -163,6 +208,7 @@ export function pageSchema(path: string | null, seo: PageSeo): Json | null {
   // The full business entity also on the pages people use to find/contact it.
   if (path === '/contact' || path === '/book-a-table') graph.push(restaurantSchema());
   if (path === '/menu') graph.push(menuSchema());
+  if (path === '/careers') graph.push(...JOB_OPENINGS.filter((job) => job.datePosted).map(jobPostingSchema));
   if (path === '/catering') {
     graph.push(serviceSchema(path, 'South Indian catering', SERVICES_CONTENT.catering.body, 'London'));
   }
